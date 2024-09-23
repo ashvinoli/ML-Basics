@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-09-22 Sun 20:22 -->
+<!-- 2024-09-22 Sun 20:51 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Pytorch</title>
+<title>Introduction to Neural Networks with PyTorch</title>
 <meta name="author" content="Ashvin Oli" />
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
@@ -39,87 +39,85 @@
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Pytorch</h1>
+<h1 class="title">Introduction to Neural Networks with PyTorch</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org81077f0">1. Introduction</a>
+<li><a href="#orgcbd80d4">Introduction</a>
 <ul>
-<li><a href="#orgb52d762">1.1. Import necessary headers</a></li>
-<li><a href="#org40382f3">1.2. Lets build some tensors</a></li>
-<li><a href="#orgadf1aee">1.3. Slicing arrays</a>
+<li><a href="#org247ffec">Import necessary headers</a></li>
+<li><a href="#org095f60e">Lets build some tensors</a></li>
+<li><a href="#org96b5d33">Slicing arrays</a>
 <ul>
-<li><a href="#org4041140">1.3.1. Slicing numpy arrays</a></li>
-<li><a href="#org4817309">1.3.2. Slicing torch arrays</a></li>
+<li><a href="#org9f403d0">Slicing numpy arrays</a></li>
+<li><a href="#orgd3961f4">Slicing torch arrays</a></li>
 </ul>
 </li>
-<li><a href="#orgd352e4b">1.4. Reshape tensors</a></li>
-<li><a href="#orgcac25e6">1.5. Convert of arrays to tensors and vice versa</a></li>
-<li><a href="#org540012c">1.6. Finding gradients</a></li>
+<li><a href="#org5c1ba28">Reshape tensors</a></li>
+<li><a href="#orgf933faa">Convert of arrays to tensors and vice versa</a></li>
+<li><a href="#org2e35b3b">Finding gradients</a></li>
 </ul>
 </li>
-<li><a href="#orge168738">2. Backpropagation and Gradient Descent</a></li>
-<li><a href="#org24e7653">3. Training Pipeline</a>
+<li><a href="#org4fb9065">Backpropagation and Gradient Descent</a></li>
+<li><a href="#org6bd1372">Training Pipeline</a>
 <ul>
-<li><a href="#org6fbbf43">3.1. Prepare Data</a></li>
-<li><a href="#orgc11c053">3.2. Design the model</a>
+<li><a href="#org0a07b06">Prepare Data</a></li>
+<li><a href="#org6f4f5dc">Design the model</a>
 <ul>
-<li><a href="#org34b8be9">3.2.1. Use the model provided by torch</a></li>
+<li><a href="#orgd9336f7">Use the model provided by torch</a></li>
 </ul>
 </li>
-<li><a href="#orge5ff18d">3.3. Building a custom model</a></li>
-<li><a href="#org040eb77">3.4. Decide on the loss function</a></li>
-<li><a href="#org0219285">3.5. Decide on optimizer</a></li>
-<li><a href="#org24e848a">3.6. Pipeline and final code</a></li>
-<li><a href="#orga09ab6d">3.7. Code with custom model</a></li>
+<li><a href="#orge2e19ce">Building a custom model</a></li>
+<li><a href="#org774cd0f">Decide on the loss function</a></li>
+<li><a href="#org2bf6c51">Decide on optimizer</a></li>
+<li><a href="#org2c73018">Pipeline and final code</a></li>
+<li><a href="#orgd060aef">Code with custom model</a></li>
 </ul>
 </li>
-<li><a href="#org30f115c">4. Logistic Regression</a>
+<li><a href="#org3fce887">Logistic Regression</a>
 <ul>
-<li><a href="#org3313f51">4.1. Prepare the data</a>
+<li><a href="#orgfeef77e">Prepare the data</a>
 <ul>
-<li><a href="#orgc60c9a2">4.1.1. Understanding Fit Transform</a></li>
+<li><a href="#orgdd575b6">Understanding Fit Transform</a></li>
 </ul>
 </li>
-<li><a href="#org1a1429c">4.2. Model preparation</a></li>
-<li><a href="#org283d525">4.3. Loss function</a></li>
-<li><a href="#orgaabb9a1">4.4. Optimizer</a></li>
-<li><a href="#orgc915b4a">4.5. Now lets train the data</a></li>
-<li><a href="#org8fa6948">4.6. Prediction and accuracy</a></li>
+<li><a href="#orgb7af955">Model preparation</a></li>
+<li><a href="#org92d16df">Loss function</a></li>
+<li><a href="#orgd2da4ec">Optimizer</a></li>
+<li><a href="#org91c5223">Now lets train the data</a></li>
+<li><a href="#org5b4c89b">Prediction and accuracy</a></li>
 </ul>
 </li>
-<li><a href="#orgb28c13c">5. Moving Back to Data Retrieval:Pandas and Excel</a>
+<li><a href="#orgd62a5bf">Moving Back to Data Retrieval:Pandas and Excel</a>
 <ul>
-<li><a href="#orgcff125a">5.1. Introduction</a></li>
-<li><a href="#orgce654e9">5.2. Manually create a pandas dataframe</a></li>
-<li><a href="#org68c068e">5.3. Querying in pandas</a></li>
-<li><a href="#org99dbcfe">5.4. Adding new columns</a></li>
+<li><a href="#org1160344">Introduction</a></li>
+<li><a href="#orgf3a7ebc">Manually create a pandas dataframe</a></li>
+<li><a href="#org522b864">Querying in pandas</a></li>
+<li><a href="#org1f8ecbc">Adding new columns</a></li>
 </ul>
 </li>
-<li><a href="#org0206178">6. Saving And Loading Trained Models</a></li>
+<li><a href="#orge87c6c8">Saving And Loading Trained Models</a></li>
 </ul>
 </div>
 </div>
-<p>
-\newpage
-</p>
 
 
 
-<div id="outline-container-org81077f0" class="outline-2">
-<h2 id="org81077f0"><span class="section-number-2">1.</span> Introduction</h2>
-<div class="outline-text-2" id="text-1">
+
+<div id="outline-container-orgcbd80d4" class="outline-2">
+<h2 id="orgcbd80d4">Introduction</h2>
+<div class="outline-text-2" id="text-orgcbd80d4">
 <p>
 In this course, we are going to learn about Pytorch. Please see installation instructions from web and come back.
 </p>
 </div>
 
-<div id="outline-container-orgb52d762" class="outline-3">
-<h3 id="orgb52d762"><span class="section-number-3">1.1.</span> Import necessary headers</h3>
-<div class="outline-text-3" id="text-1-1">
+<div id="outline-container-org247ffec" class="outline-3">
+<h3 id="org247ffec">Import necessary headers</h3>
+<div class="outline-text-3" id="text-org247ffec">
 <div class="org-src-container">
-<pre class="src src-python" id="org20c4439">
+<pre class="src src-python" id="org0db4035">
 <span style="color: #268bd2; font-weight: bold;">import</span> torch
 <span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
 </pre>
@@ -128,14 +126,14 @@ In this course, we are going to learn about Pytorch. Please see installation ins
 </div>
 
 
-<div id="outline-container-org40382f3" class="outline-3">
-<h3 id="org40382f3"><span class="section-number-3">1.2.</span> Lets build some tensors</h3>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-org095f60e" class="outline-3">
+<h3 id="org095f60e">Lets build some tensors</h3>
+<div class="outline-text-3" id="text-org095f60e">
 <p>
 Building tensors is as simple as shown below. Notice the data-types too.
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="org1814163">
+<pre class="src src-python" id="org01c987d">
 <span style="color: #268bd2; font-weight: bold;">import</span> torch
 <span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
 
@@ -168,18 +166,18 @@ Building tensors is as simple as shown below. Notice the data-types too.
 </div>
 </div>
 
-<div id="outline-container-orgadf1aee" class="outline-3">
-<h3 id="orgadf1aee"><span class="section-number-3">1.3.</span> Slicing arrays</h3>
-<div class="outline-text-3" id="text-1-3">
+<div id="outline-container-org96b5d33" class="outline-3">
+<h3 id="org96b5d33">Slicing arrays</h3>
+<div class="outline-text-3" id="text-org96b5d33">
 <p>
 Either it is slicing numpy or torch arrays, same principles apply. The basic construct is <code>[start:step:end,start:step:end.....]</code>  for all possible dimensions. If we want all data from a particular dimension just leave start, end blank and no need to specify step like "<code>[:]</code>".
 </p>
 </div>
-<div id="outline-container-org4041140" class="outline-4">
-<h4 id="org4041140"><span class="section-number-4">1.3.1.</span> Slicing numpy arrays</h4>
-<div class="outline-text-4" id="text-1-3-1">
+<div id="outline-container-org9f403d0" class="outline-4">
+<h4 id="org9f403d0">Slicing numpy arrays</h4>
+<div class="outline-text-4" id="text-org9f403d0">
 <div class="org-src-container">
-<pre class="src src-python" id="org7c8ad83">
+<pre class="src src-python" id="orgc5d47e4">
 <span style="color: #268bd2; font-weight: bold;">import</span> torch
 <span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
 
@@ -205,11 +203,11 @@ Either it is slicing numpy or torch arrays, same principles apply. The basic con
 </div>
 </div>
 
-<div id="outline-container-org4817309" class="outline-4">
-<h4 id="org4817309"><span class="section-number-4">1.3.2.</span> Slicing torch arrays</h4>
-<div class="outline-text-4" id="text-1-3-2">
+<div id="outline-container-orgd3961f4" class="outline-4">
+<h4 id="orgd3961f4">Slicing torch arrays</h4>
+<div class="outline-text-4" id="text-orgd3961f4">
 <div class="org-src-container">
-<pre class="src src-python" id="org953bfeb">
+<pre class="src src-python" id="orgb7e877a">
 <span style="color: #268bd2; font-weight: bold;">import</span> torch
 <span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
 
@@ -244,15 +242,15 @@ Either it is slicing numpy or torch arrays, same principles apply. The basic con
 </div>
 </div>
 </div>
-<div id="outline-container-orgd352e4b" class="outline-3">
-<h3 id="orgd352e4b"><span class="section-number-3">1.4.</span> Reshape tensors</h3>
-<div class="outline-text-3" id="text-1-4">
+<div id="outline-container-org5c1ba28" class="outline-3">
+<h3 id="org5c1ba28">Reshape tensors</h3>
+<div class="outline-text-3" id="text-org5c1ba28">
 <p>
 Reshaping tensors is simple process. As long as the number of items match, we may reshape any array of any size. Example we may reshape an array of dims \(5 \times 5 \times 5\) into \(5 \times 25\) or \(25 \times 5\) or \(1 \times 125\) or \(125 \times 1\).
 And one important fact while reshaping, if we put one of the dimensions as -1, pytorch automatically replaces it with the corrects size.
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="org5e92170">
+<pre class="src src-python" id="org27a5bcd">
 <span style="color: #268bd2; font-weight: bold;">import</span> torch
 <span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
 
@@ -279,15 +277,15 @@ And one important fact while reshaping, if we put one of the dimensions as -1, p
 </div>
 </div>
 </div>
-<div id="outline-container-orgcac25e6" class="outline-3">
-<h3 id="orgcac25e6"><span class="section-number-3">1.5.</span> Convert of arrays to tensors and vice versa</h3>
-<div class="outline-text-3" id="text-1-5">
+<div id="outline-container-orgf933faa" class="outline-3">
+<h3 id="orgf933faa">Convert of arrays to tensors and vice versa</h3>
+<div class="outline-text-3" id="text-orgf933faa">
 <p>
 Converting numpy arrays to torch and torch to numpy is as simple as shown below. Again notice that reference is given to each identifier so all of them point to same location in memory so that changing one will change the other.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgf08788e">
+<pre class="src src-python" id="orge8b0851">
 <span style="color: #268bd2; font-weight: bold;">import</span> torch
 <span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
 
@@ -310,9 +308,9 @@ Converting numpy arrays to torch and torch to numpy is as simple as shown below.
 </div>
 </div>
 
-<div id="outline-container-org540012c" class="outline-3">
-<h3 id="org540012c"><span class="section-number-3">1.6.</span> Finding gradients</h3>
-<div class="outline-text-3" id="text-1-6">
+<div id="outline-container-org2e35b3b" class="outline-3">
+<h3 id="org2e35b3b">Finding gradients</h3>
+<div class="outline-text-3" id="text-org2e35b3b">
 <p>
 This is one of the most important and basic parts of torch. To understand gradients properly lets create some array and do some calculations as follows:<br />
 \(\textbf{x}\) = [2,3,4]<br />
@@ -329,7 +327,7 @@ In the code there are two things to take care about. One is to set the "<b>requi
 And differentiation is only possible when <b>z</b> is a number and not a vector/tensor. 
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="org48da242">
+<pre class="src src-python" id="orgcf251e0">
 <span style="color: #268bd2; font-weight: bold;">import</span> torch
 <span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
 
@@ -357,7 +355,7 @@ There is another important thing to keep into account. Continuously calling the 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org2156d68">
+<pre class="src src-python" id="orgf5da72e">
 <span style="color: #268bd2; font-weight: bold;">import</span> torch
 <span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
 
@@ -378,7 +376,7 @@ Doing above will add to the x.grad twice making the result [4,8,12] instead of [
 To achieve such result we have to clear the x.grad as follows:
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="orgc9cbb6c">
+<pre class="src src-python" id="orgd47e4d0">
 <span style="color: #268bd2; font-weight: bold;">import</span> torch
 <span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
 
@@ -401,9 +399,9 @@ Doing above will clear the grad.
 </div>
 </div>
 </div>
-<div id="outline-container-orge168738" class="outline-2">
-<h2 id="orge168738"><span class="section-number-2">2.</span> Backpropagation and Gradient Descent</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-org4fb9065" class="outline-2">
+<h2 id="org4fb9065">Backpropagation and Gradient Descent</h2>
+<div class="outline-text-2" id="text-org4fb9065">
 <p>
 Now we learn the heart and soul of neural nets: Gradient Descent algorithm. To understand gradient descent, lets solve a simple linear regression problem numerically. We could have solved the following problem by simple linear regression model but just to illustrate gradient descent which is a numerical technique we solve the problem using numerical approach.<br />
 </p>
@@ -658,23 +656,23 @@ The code with torch was exactly the same with w and b set to 0 instead of random
 </div>
 </div>
 
-<div id="outline-container-org24e7653" class="outline-2">
-<h2 id="org24e7653"><span class="section-number-2">3.</span> Training Pipeline</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-org6bd1372" class="outline-2">
+<h2 id="org6bd1372">Training Pipeline</h2>
+<div class="outline-text-2" id="text-org6bd1372">
 <p>
 Now we do everything from defining the loss function to training the model completely in pytorch. To do so we follow the
 following steps:
 </p>
 </div>
-<div id="outline-container-org6fbbf43" class="outline-3">
-<h3 id="org6fbbf43"><span class="section-number-3">3.1.</span> Prepare Data</h3>
-<div class="outline-text-3" id="text-3-1">
+<div id="outline-container-org0a07b06" class="outline-3">
+<h3 id="org0a07b06">Prepare Data</h3>
+<div class="outline-text-3" id="text-org0a07b06">
 <p>
 First we provide input and output data:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org3d17e5d"><span style="color: #8787d7;">X</span> = torch.tensor([[1],[2],[3],[4]],dtype=torch.float32)
+<pre class="src src-python" id="orgd3b8676"><span style="color: #8787d7;">X</span> = torch.tensor([[1],[2],[3],[4]],dtype=torch.float32)
 Y = torch.tensor([[3],[5],[7],[9]],dtype=torch.float32)
 
 </pre>
@@ -725,9 +723,9 @@ consumes cigarette, etc are generally known as features.
 </div>
 </div>
 
-<div id="outline-container-orgc11c053" class="outline-3">
-<h3 id="orgc11c053"><span class="section-number-3">3.2.</span> Design the model</h3>
-<div class="outline-text-3" id="text-3-2">
+<div id="outline-container-org6f4f5dc" class="outline-3">
+<h3 id="org6f4f5dc">Design the model</h3>
+<div class="outline-text-3" id="text-org6f4f5dc">
 <p>
 After preparing data we prepare a model.
 First we do the same as we did previously, decide on the input data and the expected output data. This is exactly the same
@@ -735,7 +733,7 @@ as done above, but the dimensions of arrays are different as shown. But first we
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org84431d7"><span style="color: #268bd2; font-weight: bold;">import</span> torch
+<pre class="src src-python" id="org424b386"><span style="color: #268bd2; font-weight: bold;">import</span> torch
 <span style="color: #268bd2; font-weight: bold;">import</span> torch.nn <span style="color: #268bd2; font-weight: bold;">as</span> nn
 
 </pre>
@@ -747,11 +745,11 @@ as done above, but the dimensions of arrays are different as shown. But first we
 Using the nn module we can now directly used the pre-existing loss functions as:
 </p>
 </div>
-<div id="outline-container-org34b8be9" class="outline-4">
-<h4 id="org34b8be9"><span class="section-number-4">3.2.1.</span> Use the model provided by torch</h4>
-<div class="outline-text-4" id="text-3-2-1">
+<div id="outline-container-orgd9336f7" class="outline-4">
+<h4 id="orgd9336f7">Use the model provided by torch</h4>
+<div class="outline-text-4" id="text-orgd9336f7">
 <div class="org-src-container">
-<pre class="src src-python" id="orgec432e1"><span style="color: #8787d7;">input_size</span> = 1 <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">This is generatlly the features of the input data</span>
+<pre class="src src-python" id="org63ae569"><span style="color: #8787d7;">input_size</span> = 1 <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">This is generatlly the features of the input data</span>
 <span style="color: #8787d7;">output_size</span> = 1
 <span style="color: #8787d7;">model</span> = nn.Linear(input_size,output_size)
 </pre>
@@ -790,7 +788,7 @@ We can also deduce that the input has 3 nodes itself and output is 2 noded. as s
 </p>
 
 
-<div id="org5262275" class="figure">
+<div id="org8bbb86d" class="figure">
 <p><img src="Learning_Pytorch_20210906_120757_VlvwhH.jpg" alt="Learning_Pytorch_20210906_120757_VlvwhH.jpg" />
 </p>
 </div>
@@ -806,7 +804,7 @@ Our neural net i.e the one we are solving looks like this:
 </p>
 
 
-<div id="org1618273" class="figure">
+<div id="orgee96d7a" class="figure">
 <p><img src="Learning_Pytorch_20210907_130511_VpFV2J.jpg" alt="Learning_Pytorch_20210907_130511_VpFV2J.jpg" />
 </p>
 </div>
@@ -853,9 +851,9 @@ And to see the weights and biases any time, we may ask for them from the model a
 </div>
 </div>
 </div>
-<div id="outline-container-orge5ff18d" class="outline-3">
-<h3 id="orge5ff18d"><span class="section-number-3">3.3.</span> Building a custom model</h3>
-<div class="outline-text-3" id="text-3-3">
+<div id="outline-container-orge2e19ce" class="outline-3">
+<h3 id="orge2e19ce">Building a custom model</h3>
+<div class="outline-text-3" id="text-orge2e19ce">
 <p>
 In the previous section we used the <code>nn.Linear()</code> model provide by pytorch. Since out example was quite simple, this
 did the job, but in real life case we have to build a custom model deriving from <code>nn.Module</code> as shown below:
@@ -884,11 +882,11 @@ now putting above code altogether:
 </p>
 </div>
 </div>
-<div id="outline-container-org040eb77" class="outline-3">
-<h3 id="org040eb77"><span class="section-number-3">3.4.</span> Decide on the loss function</h3>
-<div class="outline-text-3" id="text-3-4">
+<div id="outline-container-org774cd0f" class="outline-3">
+<h3 id="org774cd0f">Decide on the loss function</h3>
+<div class="outline-text-3" id="text-org774cd0f">
 <div class="org-src-container">
-<pre class="src src-python" id="orgb783f1d"><span style="color: #8787d7;">loss</span> = nn.MSELoss()
+<pre class="src src-python" id="orgb437a64"><span style="color: #8787d7;">loss</span> = nn.MSELoss()
 </pre>
 </div>
 
@@ -903,16 +901,16 @@ the real outputs.
 </div>
 </div>
 
-<div id="outline-container-org0219285" class="outline-3">
-<h3 id="org0219285"><span class="section-number-3">3.5.</span> Decide on optimizer</h3>
-<div class="outline-text-3" id="text-3-5">
+<div id="outline-container-org2bf6c51" class="outline-3">
+<h3 id="org2bf6c51">Decide on optimizer</h3>
+<div class="outline-text-3" id="text-org2bf6c51">
 <p>
 Now instead of manually updating the gradients we use torch optimizer as follows. Notice that even though we
 already know that we need not manually declare weights and biases, but for now lets first do things manually
 then we will do everything using torch:
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="org88104e1"><span style="color: #8787d7;">optimizer</span> = torch.optim.SGD([w,b],lr=learning_rate)
+<pre class="src src-python" id="org2023073"><span style="color: #8787d7;">optimizer</span> = torch.optim.SGD([w,b],lr=learning_rate)
 </pre>
 </div>
 
@@ -930,7 +928,7 @@ same thing. And finally setting the grad to zero has to be done as done previous
 optimizer.
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="org9a12050"><span style="color: #268bd2; font-weight: bold;">for</span> i <span style="color: #268bd2; font-weight: bold;">in</span> <span style="color: #268bd2;">range</span>(n_iters):
+<pre class="src src-python" id="orgd80eb9d"><span style="color: #268bd2; font-weight: bold;">for</span> i <span style="color: #268bd2; font-weight: bold;">in</span> <span style="color: #268bd2;">range</span>(n_iters):
         <span style="color: #8787d7;">error</span> = loss(Y,predicted(X))
         error.backward()
         optimizer.step()
@@ -1012,9 +1010,9 @@ Now we first create a model as shown
 </p>
 </div>
 </div>
-<div id="outline-container-org24e848a" class="outline-3">
-<h3 id="org24e848a"><span class="section-number-3">3.6.</span> Pipeline and final code</h3>
-<div class="outline-text-3" id="text-3-6">
+<div id="outline-container-org2c73018" class="outline-3">
+<h3 id="org2c73018">Pipeline and final code</h3>
+<div class="outline-text-3" id="text-org2c73018">
 <p>
 In summary we do
 </p>
@@ -1091,9 +1089,9 @@ After training iterations f(5) = 10.990<br />
 </div>
 </div>
 
-<div id="outline-container-orga09ab6d" class="outline-3">
-<h3 id="orga09ab6d"><span class="section-number-3">3.7.</span> Code with custom model</h3>
-<div class="outline-text-3" id="text-3-7">
+<div id="outline-container-orgd060aef" class="outline-3">
+<h3 id="orgd060aef">Code with custom model</h3>
+<div class="outline-text-3" id="text-orgd060aef">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #268bd2; font-weight: bold;">import</span> torch
 <span style="color: #268bd2; font-weight: bold;">import</span> torch.nn <span style="color: #268bd2; font-weight: bold;">as</span> nn
@@ -1146,9 +1144,9 @@ After training iterations f(5) = 10.990<br />
 </div>
 </div>
 
-<div id="outline-container-org30f115c" class="outline-2">
-<h2 id="org30f115c"><span class="section-number-2">4.</span> Logistic Regression</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org3fce887" class="outline-2">
+<h2 id="org3fce887">Logistic Regression</h2>
+<div class="outline-text-2" id="text-org3fce887">
 <p>
 A regression where the outputs are either 0 or 1 i.e "logistic" as in boolean logic, is logistic regression.
 Now we will now use the data of cancer patients to predict whether a person with certain condition or
@@ -1160,7 +1158,7 @@ normalize the data. So lets get started.
 First lets import necessary headers
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="org481db1c"><span style="color: #268bd2; font-weight: bold;">import</span> torch
+<pre class="src src-python" id="org332b1f8"><span style="color: #268bd2; font-weight: bold;">import</span> torch
 <span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
 <span style="color: #268bd2; font-weight: bold;">import</span> torch.nn <span style="color: #268bd2; font-weight: bold;">as</span> nn
 <span style="color: #268bd2; font-weight: bold;">from</span> sklearn <span style="color: #268bd2; font-weight: bold;">import</span> datasets
@@ -1185,9 +1183,9 @@ independent of other <b>features</b>.
 Now we start the pipeline:
 </p>
 </div>
-<div id="outline-container-org3313f51" class="outline-3">
-<h3 id="org3313f51"><span class="section-number-3">4.1.</span> Prepare the data</h3>
-<div class="outline-text-3" id="text-4-1">
+<div id="outline-container-orgfeef77e" class="outline-3">
+<h3 id="orgfeef77e">Prepare the data</h3>
+<div class="outline-text-3" id="text-orgfeef77e">
 <p>
 Lets load the breast cancer data set as follows:
 </p>
@@ -1228,7 +1226,7 @@ logis_regression()
 </pre>
 </div>
 
-<pre class="example" id="org0c062ee">
+<pre class="example" id="org6906459">
 Shape of data:(569, 30)
 [[1.799e+01 1.038e+01 1.228e+02 ... 2.654e-01 4.601e-01 1.189e-01]
  [2.057e+01 1.777e+01 1.329e+02 ... 1.860e-01 2.750e-01 8.902e-02]
@@ -1263,7 +1261,7 @@ there will look like:
 </p>
 
 
-<div id="org2c9cf4b" class="figure">
+<div id="orga5f1736" class="figure">
 <p><img src="Learning_Pytorch_20210907_135726_LkAoTc.jpg" alt="Learning_Pytorch_20210907_135726_LkAoTc.jpg" />
 </p>
 </div>
@@ -1362,7 +1360,7 @@ logis_regression()
 </pre>
 </div>
 
-<pre class="example" id="orge4740fe">
+<pre class="example" id="orgde9b187">
 (455, 30) (114, 30) (455,) (114,)
 X-Train:[[9.029e+00 1.733e+01 5.879e+01 ... 1.750e-01 4.228e-01 1.175e-01]
  [2.109e+01 2.657e+01 1.427e+02 ... 2.903e-01 4.098e-01 1.284e-01]
@@ -1440,7 +1438,7 @@ logis_regression()
 </pre>
 </div>
 
-<pre class="example" id="orgb2d7c67">
+<pre class="example" id="orgf300f32">
 (455, 30) (114, 30)
 X_train:[[-1.44075296 -0.43531947 -1.36208497 ...  0.9320124   2.09724217
    1.88645014]
@@ -1471,9 +1469,9 @@ X_test:[[-0.46649743 -0.13728933 -0.44421138 ... -0.19435087  0.17275669
 </pre>
 </div>
 
-<div id="outline-container-orgc60c9a2" class="outline-4">
-<h4 id="orgc60c9a2"><span class="section-number-4">4.1.1.</span> Understanding Fit Transform</h4>
-<div class="outline-text-4" id="text-4-1-1">
+<div id="outline-container-orgdd575b6" class="outline-4">
+<h4 id="orgdd575b6">Understanding Fit Transform</h4>
+<div class="outline-text-4" id="text-orgdd575b6">
 <p>
     What is going on? What is the fit_transform doing? What is the transform doing? Lets try to answer.
 fit_transform is computing the mean and sd of individual features in all data, and normalizing them. fit_transform is combination of fit() and transform() functions. fit() function computes the mean and sd, transform() then applies it to the data. fit_transform() does both of them at once. fit_transform only remembers the mean and standard deviation of last computation so while doing <code>inverse_transfrom()</code> which will get the original data remember that the last used fit_transforms' data's mean and sd will be used to inverse_transform the data.  Lets understand the basics first:
@@ -1583,7 +1581,7 @@ logis_regression()
 </pre>
 </div>
 
-<pre class="example" id="org13b6d55">
+<pre class="example" id="orga679043">
 Before normalizing:
 first 10 values of first feature train:[ 9.029 21.09   9.173 10.65  10.17  14.54  14.41  11.43  12.25  19.89 ]
 mean of all first feature:14.117635164835166 sd:3.53192760912877
@@ -1671,9 +1669,9 @@ With this our data preparation is done.
 </div>
 </div>
 
-<div id="outline-container-org1a1429c" class="outline-3">
-<h3 id="org1a1429c"><span class="section-number-3">4.2.</span> Model preparation</h3>
-<div class="outline-text-3" id="text-4-2">
+<div id="outline-container-orgb7af955" class="outline-3">
+<h3 id="orgb7af955">Model preparation</h3>
+<div class="outline-text-3" id="text-orgb7af955">
 <p>
 Now lets build a custom model. Here we will be using sigmoid function to squish the output to a range of 0 and 1.
 </p>
@@ -1711,7 +1709,7 @@ which looks like:
 </p>
 
 
-<div id="orgd858afd" class="figure">
+<div id="org4fb46b3" class="figure">
 <p><img src="sigmoid.png" alt="sigmoid.png" />
 </p>
 </div>
@@ -1723,9 +1721,9 @@ activation functions.
 </div>
 </div>
 
-<div id="outline-container-org283d525" class="outline-3">
-<h3 id="org283d525"><span class="section-number-3">4.3.</span> Loss function</h3>
-<div class="outline-text-3" id="text-4-3">
+<div id="outline-container-org92d16df" class="outline-3">
+<h3 id="org92d16df">Loss function</h3>
+<div class="outline-text-3" id="text-org92d16df">
 <p>
 In the previous example we used Mean Squared Loss function (which
 is what we should use we we expect a real number output
@@ -1746,9 +1744,9 @@ net doesn't necessarily ouput a value between 0 and 1 we used the sigmoid functi
 </div>
 </div>
 
-<div id="outline-container-orgaabb9a1" class="outline-3">
-<h3 id="orgaabb9a1"><span class="section-number-3">4.4.</span> Optimizer</h3>
-<div class="outline-text-3" id="text-4-4">
+<div id="outline-container-orgd2da4ec" class="outline-3">
+<h3 id="orgd2da4ec">Optimizer</h3>
+<div class="outline-text-3" id="text-orgd2da4ec">
 <p>
 We have our same old optimizer,and lets keep the learning rate to 0.01
 </p>
@@ -1760,9 +1758,9 @@ We have our same old optimizer,and lets keep the learning rate to 0.01
 </div>
 </div>
 
-<div id="outline-container-orgc915b4a" class="outline-3">
-<h3 id="orgc915b4a"><span class="section-number-3">4.5.</span> Now lets train the data</h3>
-<div class="outline-text-3" id="text-4-5">
+<div id="outline-container-org91c5223" class="outline-3">
+<h3 id="org91c5223">Now lets train the data</h3>
+<div class="outline-text-3" id="text-org91c5223">
 <p>
 Remember that there are 5 steps to training:
 </p>
@@ -1803,9 +1801,9 @@ Remember that there are 5 steps to training:
 </div>
 </div>
 
-<div id="outline-container-org8fa6948" class="outline-3">
-<h3 id="org8fa6948"><span class="section-number-3">4.6.</span> Prediction and accuracy</h3>
-<div class="outline-text-3" id="text-4-6">
+<div id="outline-container-org5b4c89b" class="outline-3">
+<h3 id="org5b4c89b">Prediction and accuracy</h3>
+<div class="outline-text-3" id="text-org5b4c89b">
 <p>
 Now that our model is trained, we now used our test data to see, how well our model performs.
 </p>
@@ -1941,13 +1939,13 @@ array eg \( 4 \times 1\).
 
 
 
-<div id="outline-container-orgb28c13c" class="outline-2">
-<h2 id="orgb28c13c"><span class="section-number-2">5.</span> Moving Back to Data Retrieval:Pandas and Excel</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-orgd62a5bf" class="outline-2">
+<h2 id="orgd62a5bf">Moving Back to Data Retrieval:Pandas and Excel</h2>
+<div class="outline-text-2" id="text-orgd62a5bf">
 </div>
-<div id="outline-container-orgcff125a" class="outline-3">
-<h3 id="orgcff125a"><span class="section-number-3">5.1.</span> Introduction</h3>
-<div class="outline-text-3" id="text-5-1">
+<div id="outline-container-org1160344" class="outline-3">
+<h3 id="org1160344">Introduction</h3>
+<div class="outline-text-3" id="text-org1160344">
 <p>
 Do install the necessary packages:
 </p>
@@ -1962,7 +1960,7 @@ Make sure that "xlrd" package is uninstalled, or it is upto date else the syntax
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org68587b3"><span style="color: #268bd2; font-weight: bold;">import</span> pandas <span style="color: #268bd2; font-weight: bold;">as</span> pd
+<pre class="src src-python" id="orgb683ba5"><span style="color: #268bd2; font-weight: bold;">import</span> pandas <span style="color: #268bd2; font-weight: bold;">as</span> pd
 </pre>
 </div>
 
@@ -2009,9 +2007,9 @@ speed_numpy = speed.to_numpy(speed)
 </div>
 </div>
 
-<div id="outline-container-orgce654e9" class="outline-3">
-<h3 id="orgce654e9"><span class="section-number-3">5.2.</span> Manually create a pandas dataframe</h3>
-<div class="outline-text-3" id="text-5-2">
+<div id="outline-container-orgf3a7ebc" class="outline-3">
+<h3 id="orgf3a7ebc">Manually create a pandas dataframe</h3>
+<div class="outline-text-3" id="text-orgf3a7ebc">
 <p>
 Manually creating data frame is as simple as:
 </p>
@@ -2031,9 +2029,9 @@ Manually creating data frame is as simple as:
 </div>
 </div>
 
-<div id="outline-container-org68c068e" class="outline-3">
-<h3 id="org68c068e"><span class="section-number-3">5.3.</span> Querying in pandas</h3>
-<div class="outline-text-3" id="text-5-3">
+<div id="outline-container-org522b864" class="outline-3">
+<h3 id="org522b864">Querying in pandas</h3>
+<div class="outline-text-3" id="text-org522b864">
 <p>
 Simple queries like "where col_A &gt; col_B" etc can be achieved as simply as follows. Just refer to the column names as shown. Also note that the use <b>&amp;</b> for <b>and</b> and <b>|</b> for <b>or</b>  i.e the bit wise operators.
 </p>
@@ -2047,9 +2045,9 @@ Simple queries like "where col_A &gt; col_B" etc can be achieved as simply as fo
 </div>
 </div>
 
-<div id="outline-container-org99dbcfe" class="outline-3">
-<h3 id="org99dbcfe"><span class="section-number-3">5.4.</span> Adding new columns</h3>
-<div class="outline-text-3" id="text-5-4">
+<div id="outline-container-org1f8ecbc" class="outline-3">
+<h3 id="org1f8ecbc">Adding new columns</h3>
+<div class="outline-text-3" id="text-org1f8ecbc">
 <p>
 Adding new columns in pandas is as simple as adding new as adding new item in a dictionary. Simply
 </p>
@@ -2084,11 +2082,11 @@ Above code will add new column "Discounted_Price" as the end using the formula a
 </div>
 </div>
 
-<div id="outline-container-org0206178" class="outline-2">
-<h2 id="org0206178"><span class="section-number-2">6.</span> Saving And Loading Trained Models</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-orge87c6c8" class="outline-2">
+<h2 id="orge87c6c8">Saving And Loading Trained Models</h2>
+<div class="outline-text-2" id="text-orge87c6c8">
 
-<div id="orgf8aef6d" class="figure">
+<div id="org81db018" class="figure">
 <p><img src="Learning_Pytorch_20220417_205128_nVT541.jpg" alt="Learning_Pytorch_20220417_205128_nVT541.jpg" />
 </p>
 </div>
@@ -2124,7 +2122,7 @@ model.<span style="color: #268bd2;">eval</span>()
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Ashvin Oli</p>
-<p class="date">Created: 2024-09-22 Sun 20:22</p>
+<p class="date">Created: 2024-09-22 Sun 20:51</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
