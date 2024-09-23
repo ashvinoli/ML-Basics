@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-09-22 Sun 20:51 -->
+<!-- 2024-09-22 Sun 21:21 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Introduction to Neural Networks with PyTorch</title>
@@ -44,158 +44,157 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgcbd80d4">Introduction</a>
+<li><a href="#orge3d36ab">Introduction</a>
 <ul>
-<li><a href="#org247ffec">Import necessary headers</a></li>
-<li><a href="#org095f60e">Lets build some tensors</a></li>
-<li><a href="#org96b5d33">Slicing arrays</a>
+<li><a href="#org17b6d8b">Import necessary headers</a></li>
+<li><a href="#org6c88429">Lets build some tensors</a></li>
+<li><a href="#orgd5bca71">Slicing arrays</a>
 <ul>
-<li><a href="#org9f403d0">Slicing numpy arrays</a></li>
-<li><a href="#orgd3961f4">Slicing torch arrays</a></li>
+<li><a href="#org913931c">Slicing numpy arrays</a></li>
+<li><a href="#orge747038">Slicing torch arrays</a></li>
 </ul>
 </li>
-<li><a href="#org5c1ba28">Reshape tensors</a></li>
-<li><a href="#orgf933faa">Convert of arrays to tensors and vice versa</a></li>
-<li><a href="#org2e35b3b">Finding gradients</a></li>
+<li><a href="#org4e92623">Reshape tensors</a></li>
+<li><a href="#org03b4fc1">Convert of arrays to tensors and vice versa</a></li>
+<li><a href="#org71f8d92">Finding gradients</a></li>
 </ul>
 </li>
-<li><a href="#org4fb9065">Backpropagation and Gradient Descent</a></li>
-<li><a href="#org6bd1372">Training Pipeline</a>
+<li><a href="#org11f12e3">Backpropagation and Gradient Descent</a></li>
+<li><a href="#orgaa77b5c">Training Pipeline</a>
 <ul>
-<li><a href="#org0a07b06">Prepare Data</a></li>
-<li><a href="#org6f4f5dc">Design the model</a>
+<li><a href="#orga402136">Prepare Data</a></li>
+<li><a href="#org992954e">Design the model</a>
 <ul>
-<li><a href="#orgd9336f7">Use the model provided by torch</a></li>
+<li><a href="#org637baee">Use the model provided by torch</a></li>
 </ul>
 </li>
-<li><a href="#orge2e19ce">Building a custom model</a></li>
-<li><a href="#org774cd0f">Decide on the loss function</a></li>
-<li><a href="#org2bf6c51">Decide on optimizer</a></li>
-<li><a href="#org2c73018">Pipeline and final code</a></li>
-<li><a href="#orgd060aef">Code with custom model</a></li>
+<li><a href="#org97908ab">Building a custom model</a></li>
+<li><a href="#org9d6b6f5">Decide on the loss function</a></li>
+<li><a href="#org0ed82b1">Decide on optimizer</a></li>
+<li><a href="#orga834ebc">Pipeline and final code</a></li>
+<li><a href="#org46d2059">Code with custom model</a></li>
 </ul>
 </li>
-<li><a href="#org3fce887">Logistic Regression</a>
+<li><a href="#org6118b51">Logistic Regression</a>
 <ul>
-<li><a href="#orgfeef77e">Prepare the data</a>
+<li><a href="#orgacb2f8f">Prepare the data</a>
 <ul>
-<li><a href="#orgdd575b6">Understanding Fit Transform</a></li>
+<li><a href="#org0695b80">Understanding Fit Transform</a></li>
 </ul>
 </li>
-<li><a href="#orgb7af955">Model preparation</a></li>
-<li><a href="#org92d16df">Loss function</a></li>
-<li><a href="#orgd2da4ec">Optimizer</a></li>
-<li><a href="#org91c5223">Now lets train the data</a></li>
-<li><a href="#org5b4c89b">Prediction and accuracy</a></li>
+<li><a href="#org339488c">Model preparation</a></li>
+<li><a href="#org2bd48e9">Loss function</a></li>
+<li><a href="#orgb6e7127">Optimizer</a></li>
+<li><a href="#orge20a354">Now lets train the data</a></li>
+<li><a href="#orgb2d7c87">Prediction and accuracy</a></li>
 </ul>
 </li>
-<li><a href="#orgd62a5bf">Moving Back to Data Retrieval:Pandas and Excel</a>
+<li><a href="#org335ea57">Moving Back to Data Retrieval:Pandas and Excel</a>
 <ul>
-<li><a href="#org1160344">Introduction</a></li>
-<li><a href="#orgf3a7ebc">Manually create a pandas dataframe</a></li>
-<li><a href="#org522b864">Querying in pandas</a></li>
-<li><a href="#org1f8ecbc">Adding new columns</a></li>
+<li><a href="#org5282753">Introduction</a></li>
+<li><a href="#orgade359b">Manually create a pandas dataframe</a></li>
+<li><a href="#org8b78b31">Querying in pandas</a></li>
+<li><a href="#org0931476">Adding new columns</a></li>
 </ul>
 </li>
-<li><a href="#orge87c6c8">Saving And Loading Trained Models</a></li>
+<li><a href="#org1b8337f">Saving And Loading Trained Models</a></li>
 </ul>
 </div>
 </div>
 
 
 
-
-<div id="outline-container-orgcbd80d4" class="outline-2">
-<h2 id="orgcbd80d4">Introduction</h2>
-<div class="outline-text-2" id="text-orgcbd80d4">
+<div id="outline-container-orge3d36ab" class="outline-2">
+<h2 id="orge3d36ab">Introduction</h2>
+<div class="outline-text-2" id="text-orge3d36ab">
 <p>
 In this course, we are going to learn about Pytorch. Please see installation instructions from web and come back.
 </p>
 </div>
 
-<div id="outline-container-org247ffec" class="outline-3">
-<h3 id="org247ffec">Import necessary headers</h3>
-<div class="outline-text-3" id="text-org247ffec">
+<div id="outline-container-org17b6d8b" class="outline-3">
+<h3 id="org17b6d8b">Import necessary headers</h3>
+<div class="outline-text-3" id="text-org17b6d8b">
 <div class="org-src-container">
-<pre class="src src-python" id="org0db4035">
-<span style="color: #268bd2; font-weight: bold;">import</span> torch
-<span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
+<pre class="src src-python" id="org2acbbea">
+<span style="color: #3a81c3; font-weight: bold;">import</span> torch
+<span style="color: #3a81c3; font-weight: bold;">import</span> numpy <span style="color: #3a81c3; font-weight: bold;">as</span> np
 </pre>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-org095f60e" class="outline-3">
-<h3 id="org095f60e">Lets build some tensors</h3>
-<div class="outline-text-3" id="text-org095f60e">
+<div id="outline-container-org6c88429" class="outline-3">
+<h3 id="org6c88429">Lets build some tensors</h3>
+<div class="outline-text-3" id="text-org6c88429">
 <p>
 Building tensors is as simple as shown below. Notice the data-types too.
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="org01c987d">
-<span style="color: #268bd2; font-weight: bold;">import</span> torch
-<span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
+<pre class="src src-python" id="orgf688c43">
+<span style="color: #3a81c3; font-weight: bold;">import</span> torch
+<span style="color: #3a81c3; font-weight: bold;">import</span> numpy <span style="color: #3a81c3; font-weight: bold;">as</span> np
 
-<span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">play_with_empty_and_random_tensors</span>( ):
-    <span style="color: #8787d7;">tensors</span> = []
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">Empty ones</span>
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">play_with_empty_and_random_tensors</span>( ):
+    <span style="color: #715ab1; font-weight: bold;">tensors</span> = []
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Empty ones</span>
     tensors.append(torch.empty(5, dtype=torch.float32))
-    tensors.append(torch.empty(5,5, dtype=torch.<span style="color: #268bd2;">int</span>))
-    tensors.append(torch.empty(5,5,5, dtype=torch.<span style="color: #268bd2;">int</span>))
+    tensors.append(torch.empty(5,5, dtype=torch.<span style="color: #3a81c3;">int</span>))
+    tensors.append(torch.empty(5,5,5, dtype=torch.<span style="color: #3a81c3;">int</span>))
 
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">Random ones</span>
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Random ones</span>
     tensors.append(torch.rand(5, dtype=torch.float32))
     tensors.append(torch.rand(5,5, dtype=torch.float32))
     tensors.append(torch.rand(5,5,5, dtype=torch.float32))
 
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">Tensor with zeros and ones</span>
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Tensor with zeros and ones</span>
     tensors.append(torch.zeros(5, dtype=torch.float32))
     tensors.append(torch.ones(5, dtype=torch.float32))
     tensors.append(torch.ones(5,5, dtype=torch.float32))
     tensors.append(torch.ones(5,5,5, dtype=torch.float32))
 
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">Tensords with arbirary value</span>
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Tensords with arbirary value</span>
     tensors.append(torch.tensor([1,2,3,4,5], dtype=torch.float32))
     tensors.append(torch.tensor([[1,2],[3,4],[5,6]], dtype=torch.float32))
-    <span style="color: #268bd2; font-weight: bold;">for</span> tensor <span style="color: #268bd2; font-weight: bold;">in</span> tensors:
-        <span style="color: #268bd2;">print</span>(tensor,tensor.size())
+    <span style="color: #3a81c3; font-weight: bold;">for</span> tensor <span style="color: #3a81c3; font-weight: bold;">in</span> tensors:
+        <span style="color: #3a81c3;">print</span>(tensor,tensor.size())
 
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org96b5d33" class="outline-3">
-<h3 id="org96b5d33">Slicing arrays</h3>
-<div class="outline-text-3" id="text-org96b5d33">
+<div id="outline-container-orgd5bca71" class="outline-3">
+<h3 id="orgd5bca71">Slicing arrays</h3>
+<div class="outline-text-3" id="text-orgd5bca71">
 <p>
 Either it is slicing numpy or torch arrays, same principles apply. The basic construct is <code>[start:step:end,start:step:end.....]</code>  for all possible dimensions. If we want all data from a particular dimension just leave start, end blank and no need to specify step like "<code>[:]</code>".
 </p>
 </div>
-<div id="outline-container-org9f403d0" class="outline-4">
-<h4 id="org9f403d0">Slicing numpy arrays</h4>
-<div class="outline-text-4" id="text-org9f403d0">
+<div id="outline-container-org913931c" class="outline-4">
+<h4 id="org913931c">Slicing numpy arrays</h4>
+<div class="outline-text-4" id="text-org913931c">
 <div class="org-src-container">
-<pre class="src src-python" id="orgc5d47e4">
-<span style="color: #268bd2; font-weight: bold;">import</span> torch
-<span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
+<pre class="src src-python" id="org77d3c12">
+<span style="color: #3a81c3; font-weight: bold;">import</span> torch
+<span style="color: #3a81c3; font-weight: bold;">import</span> numpy <span style="color: #3a81c3; font-weight: bold;">as</span> np
 
-<span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">lets_slice_np_arrays</span>( ):
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">Slicing numpy arrays</span>
-    <span style="color: #8787d7;">my_arr</span> = np.random.rand(5,5)
-    <span style="color: #268bd2;">print</span>(my_arr)
-    <span style="color: #268bd2;">print</span>(<span style="color: #2aa198;">"from 1 to all:"</span>)
-    <span style="color: #268bd2;">print</span>(my_arr[1:])
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">lets_slice_np_arrays</span>( ):
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Slicing numpy arrays</span>
+    <span style="color: #715ab1; font-weight: bold;">my_arr</span> = np.random.rand(5,5)
+    <span style="color: #3a81c3;">print</span>(my_arr)
+    <span style="color: #3a81c3;">print</span>(<span style="color: #2d9574;">"from 1 to all:"</span>)
+    <span style="color: #3a81c3;">print</span>(my_arr[1:])
 
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">Print first column</span>
-    <span style="color: #268bd2;">print</span>(my_arr[:,0])
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Print first column</span>
+    <span style="color: #3a81c3;">print</span>(my_arr[:,0])
 
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">Print first row</span>
-    <span style="color: #268bd2;">print</span>(my_arr[0,:])
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Print first row</span>
+    <span style="color: #3a81c3;">print</span>(my_arr[0,:])
 
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">First to third row and second column</span>
-    <span style="color: #268bd2;">print</span>(my_arr[0:3,1])
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">First to third row and second column</span>
+    <span style="color: #3a81c3;">print</span>(my_arr[0:3,1])
 
 
 </pre>
@@ -203,38 +202,38 @@ Either it is slicing numpy or torch arrays, same principles apply. The basic con
 </div>
 </div>
 
-<div id="outline-container-orgd3961f4" class="outline-4">
-<h4 id="orgd3961f4">Slicing torch arrays</h4>
-<div class="outline-text-4" id="text-orgd3961f4">
+<div id="outline-container-orge747038" class="outline-4">
+<h4 id="orge747038">Slicing torch arrays</h4>
+<div class="outline-text-4" id="text-orge747038">
 <div class="org-src-container">
-<pre class="src src-python" id="orgb7e877a">
-<span style="color: #268bd2; font-weight: bold;">import</span> torch
-<span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
+<pre class="src src-python" id="org21154db">
+<span style="color: #3a81c3; font-weight: bold;">import</span> torch
+<span style="color: #3a81c3; font-weight: bold;">import</span> numpy <span style="color: #3a81c3; font-weight: bold;">as</span> np
 
-<span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">lets_slice_torch_arrays</span>( ):
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">Slicing torch arrays which is identical to numpy arrays.</span>
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">See how in 3D the same logic applies</span>
-    <span style="color: #8787d7;">my_arr</span> = torch.rand(5,5,5)
-    <span style="color: #268bd2;">print</span>(my_arr)
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">lets_slice_torch_arrays</span>( ):
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Slicing torch arrays which is identical to numpy arrays.</span>
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">See how in 3D the same logic applies</span>
+    <span style="color: #715ab1; font-weight: bold;">my_arr</span> = torch.rand(5,5,5)
+    <span style="color: #3a81c3;">print</span>(my_arr)
 
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">All from first index, and zero from each of 1st data so it will print a</span>
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">5x5 matrix consisting of 1st rows of each of the 5x5 data in the my_arr</span>
-    <span style="color: #268bd2;">print</span>(my_arr[:,0])
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">All from first index, and zero from each of 1st data so it will print a</span>
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">5x5 matrix consisting of 1st rows of each of the 5x5 data in the my_arr</span>
+    <span style="color: #3a81c3;">print</span>(my_arr[:,0])
 
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">From 1st 5x5 data i.e 0th data, print all. It prints first 5x5 data.</span>
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">Remember to think recursively</span>
-    <span style="color: #268bd2;">print</span>(my_arr[0,:])
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">From 1st 5x5 data i.e 0th data, print all. It prints first 5x5 data.</span>
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Remember to think recursively</span>
+    <span style="color: #3a81c3;">print</span>(my_arr[0,:])
 
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">Take first 3 5x5 data, and get 2nd rows from each 5x5 data</span>
-    <span style="color: #268bd2;">print</span>(my_arr[0:3,1])
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Take first 3 5x5 data, and get 2nd rows from each 5x5 data</span>
+    <span style="color: #3a81c3;">print</span>(my_arr[0:3,1])
 
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">Random</span>
-    <span style="color: #268bd2;">print</span>(<span style="color: #2aa198;">'testing my '</span>)
-    <span style="color: #268bd2;">print</span>(my_arr[2,:,4])
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Random</span>
+    <span style="color: #3a81c3;">print</span>(<span style="color: #2d9574;">'testing my '</span>)
+    <span style="color: #3a81c3;">print</span>(my_arr[2,:,4])
 
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">print the value not as a tensor but as a value</span>
-    <span style="color: #268bd2;">print</span>(my_arr[1,2,3]) <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">This will print the value as a 1D tensor</span>
-    <span style="color: #268bd2;">print</span>(my_arr[1,2,3].item()) <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">This will print the value not as a 1D tensor but as a value</span>
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">print the value not as a tensor but as a value</span>
+    <span style="color: #3a81c3;">print</span>(my_arr[1,2,3]) <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">This will print the value as a 1D tensor</span>
+    <span style="color: #3a81c3;">print</span>(my_arr[1,2,3].item()) <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">This will print the value not as a 1D tensor but as a value</span>
 
 
 </pre>
@@ -242,75 +241,75 @@ Either it is slicing numpy or torch arrays, same principles apply. The basic con
 </div>
 </div>
 </div>
-<div id="outline-container-org5c1ba28" class="outline-3">
-<h3 id="org5c1ba28">Reshape tensors</h3>
-<div class="outline-text-3" id="text-org5c1ba28">
+<div id="outline-container-org4e92623" class="outline-3">
+<h3 id="org4e92623">Reshape tensors</h3>
+<div class="outline-text-3" id="text-org4e92623">
 <p>
 Reshaping tensors is simple process. As long as the number of items match, we may reshape any array of any size. Example we may reshape an array of dims \(5 \times 5 \times 5\) into \(5 \times 25\) or \(25 \times 5\) or \(1 \times 125\) or \(125 \times 1\).
 And one important fact while reshaping, if we put one of the dimensions as -1, pytorch automatically replaces it with the corrects size.
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="org27a5bcd">
-<span style="color: #268bd2; font-weight: bold;">import</span> torch
-<span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
+<pre class="src src-python" id="orgabe623c">
+<span style="color: #3a81c3; font-weight: bold;">import</span> torch
+<span style="color: #3a81c3; font-weight: bold;">import</span> numpy <span style="color: #3a81c3; font-weight: bold;">as</span> np
 
-<span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">lets_reshape_tensors</span>( ):
-    <span style="color: #8787d7;">my_arr</span> = torch.rand(5,5,5)
-    <span style="color: #268bd2;">print</span>(my_arr)
-    <span style="color: #268bd2;">print</span>(my_arr.size())
-    <span style="color: #8787d7;">my_arr_made_1D</span> = my_arr.view(125)
-    <span style="color: #268bd2;">print</span>(my_arr_made_1D)
-    <span style="color: #268bd2;">print</span>(my_arr_made_1D.size())
-    <span style="color: #8787d7;">my_arr_made_2D</span> = my_arr.view(25,5)
-    <span style="color: #268bd2;">print</span>(my_arr_made_2D)
-    <span style="color: #268bd2;">print</span>(my_arr_made_2D.size())
-    <span style="color: #8787d7;">my_arr_made_2D</span> = my_arr.view(5,25)
-    <span style="color: #268bd2;">print</span>(my_arr_made_2D)
-    <span style="color: #268bd2;">print</span>(my_arr_made_2D.size())
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">lets_reshape_tensors</span>( ):
+    <span style="color: #715ab1; font-weight: bold;">my_arr</span> = torch.rand(5,5,5)
+    <span style="color: #3a81c3;">print</span>(my_arr)
+    <span style="color: #3a81c3;">print</span>(my_arr.size())
+    <span style="color: #715ab1; font-weight: bold;">my_arr_made_1D</span> = my_arr.view(125)
+    <span style="color: #3a81c3;">print</span>(my_arr_made_1D)
+    <span style="color: #3a81c3;">print</span>(my_arr_made_1D.size())
+    <span style="color: #715ab1; font-weight: bold;">my_arr_made_2D</span> = my_arr.view(25,5)
+    <span style="color: #3a81c3;">print</span>(my_arr_made_2D)
+    <span style="color: #3a81c3;">print</span>(my_arr_made_2D.size())
+    <span style="color: #715ab1; font-weight: bold;">my_arr_made_2D</span> = my_arr.view(5,25)
+    <span style="color: #3a81c3;">print</span>(my_arr_made_2D)
+    <span style="color: #3a81c3;">print</span>(my_arr_made_2D.size())
 
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">To let pytorch detect one of the reshaped sizes just put -1 there for example</span>
-    <span style="color: #8787d7;">my_arr_made_2D</span> = my_arr.view(5,-1) <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">The minus one will automatically be 25</span>
-    <span style="color: #268bd2;">print</span>(my_arr_made_2D)
-    <span style="color: #268bd2;">print</span>(my_arr_made_2D.size())
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">To let pytorch detect one of the reshaped sizes just put -1 there for example</span>
+    <span style="color: #715ab1; font-weight: bold;">my_arr_made_2D</span> = my_arr.view(5,-1) <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">The minus one will automatically be 25</span>
+    <span style="color: #3a81c3;">print</span>(my_arr_made_2D)
+    <span style="color: #3a81c3;">print</span>(my_arr_made_2D.size())
 
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgf933faa" class="outline-3">
-<h3 id="orgf933faa">Convert of arrays to tensors and vice versa</h3>
-<div class="outline-text-3" id="text-orgf933faa">
+<div id="outline-container-org03b4fc1" class="outline-3">
+<h3 id="org03b4fc1">Convert of arrays to tensors and vice versa</h3>
+<div class="outline-text-3" id="text-org03b4fc1">
 <p>
 Converting numpy arrays to torch and torch to numpy is as simple as shown below. Again notice that reference is given to each identifier so all of them point to same location in memory so that changing one will change the other.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orge8b0851">
-<span style="color: #268bd2; font-weight: bold;">import</span> torch
-<span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
+<pre class="src src-python" id="orgd8074db">
+<span style="color: #3a81c3; font-weight: bold;">import</span> torch
+<span style="color: #3a81c3; font-weight: bold;">import</span> numpy <span style="color: #3a81c3; font-weight: bold;">as</span> np
 
-<span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">lets_convert_numpy_tensor_vice_versa</span>( ):
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">Convert from torch to numpy</span>
-    <span style="color: #8787d7;">my_arr_torch</span> = torch.rand(5,5,5)
-    <span style="color: #268bd2;">print</span>(my_arr_torch)
-    <span style="color: #8787d7;">my_arr_np</span> = my_arr_torch.numpy()
-    <span style="color: #268bd2;">print</span>(my_arr_np)
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">lets_convert_numpy_tensor_vice_versa</span>( ):
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Convert from torch to numpy</span>
+    <span style="color: #715ab1; font-weight: bold;">my_arr_torch</span> = torch.rand(5,5,5)
+    <span style="color: #3a81c3;">print</span>(my_arr_torch)
+    <span style="color: #715ab1; font-weight: bold;">my_arr_np</span> = my_arr_torch.numpy()
+    <span style="color: #3a81c3;">print</span>(my_arr_np)
 
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">Convert from numpy to torch</span>
-    <span style="color: #8787d7;">my_arr_torch_from_np</span> = torch.from_numpy(my_arr_np)
-    <span style="color: #268bd2;">print</span>(my_arr_torch_from_np)
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Convert from numpy to torch</span>
+    <span style="color: #715ab1; font-weight: bold;">my_arr_torch_from_np</span> = torch.from_numpy(my_arr_np)
+    <span style="color: #3a81c3;">print</span>(my_arr_torch_from_np)
 
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">But be very carefull now that my_arr_torch_from_np, my_arr_np, my_arr_torch</span>
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">are all pointing to the same memory location, and mofification of one will modify all of the others</span>
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">But be very carefull now that my_arr_torch_from_np, my_arr_np, my_arr_torch</span>
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">are all pointing to the same memory location, and mofification of one will modify all of the others</span>
 
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org2e35b3b" class="outline-3">
-<h3 id="org2e35b3b">Finding gradients</h3>
-<div class="outline-text-3" id="text-org2e35b3b">
+<div id="outline-container-org71f8d92" class="outline-3">
+<h3 id="org71f8d92">Finding gradients</h3>
+<div class="outline-text-3" id="text-org71f8d92">
 <p>
 This is one of the most important and basic parts of torch. To understand gradients properly lets create some array and do some calculations as follows:<br />
 \(\textbf{x}\) = [2,3,4]<br />
@@ -327,25 +326,25 @@ In the code there are two things to take care about. One is to set the "<b>requi
 And differentiation is only possible when <b>z</b> is a number and not a vector/tensor. 
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="orgcf251e0">
-<span style="color: #268bd2; font-weight: bold;">import</span> torch
-<span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
+<pre class="src src-python" id="org2582274">
+<span style="color: #3a81c3; font-weight: bold;">import</span> torch
+<span style="color: #3a81c3; font-weight: bold;">import</span> numpy <span style="color: #3a81c3; font-weight: bold;">as</span> np
 
-<span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">lets_find_gradients</span>():
-    <span style="color: #8787d7;">x</span> = torch.from_numpy(np.array([2,3,4],dtype=np.float32))
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">We could have also done x = torch.tensor([2,3,4],dype = tensor.float32)</span>
-    x.requires_grad = <span style="color: #d75fd7;">True</span>
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">lets_find_gradients</span>():
+    <span style="color: #715ab1; font-weight: bold;">x</span> = torch.from_numpy(np.array([2,3,4],dtype=np.float32))
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">We could have also done x = torch.tensor([2,3,4],dype = tensor.float32)</span>
+    x.requires_grad = <span style="color: #4e3163;">True</span>
 
     z = 2*(x+2)**2
     z = z.mean()
-    <span style="color: #268bd2;">print</span>(z)
-    z.backward() <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">This computes dz/dx and puts the values in x.grad</span>
-    <span style="color: #268bd2;">print</span>(x.grad)
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">to remove the requires_grad and prevent pytorch from </span>
-    <span style="color: #008787; background-color: #262626;"># </span><span style="color: #008787; background-color: #262626;">further tracking where x is used and creating gradient functions in our computational graph, we mays simply</span>
-    x.requires_grad = <span style="color: #d75fd7;">False</span> <span style="color: #008787; background-color: #262626;"># </span><span style="color: #008787; background-color: #262626;">or we maydo x.requires_grad_(False). Any function in pytorch with trailing "_" modifies</span>
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">the variable to which the function is attached to </span>
-    <span style="color: #268bd2;">print</span>(x)
+    <span style="color: #3a81c3;">print</span>(z)
+    z.backward() <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">This computes dz/dx and puts the values in x.grad</span>
+    <span style="color: #3a81c3;">print</span>(x.grad)
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">to remove the requires_grad and prevent pytorch from </span>
+    <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">further tracking where x is used and creating gradient functions in our computational graph, we mays simply</span>
+    x.requires_grad = <span style="color: #4e3163;">False</span> <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">or we maydo x.requires_grad_(False). Any function in pytorch with trailing "_" modifies</span>
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">the variable to which the function is attached to </span>
+    <span style="color: #3a81c3;">print</span>(x)
 
 </pre>
 </div>
@@ -355,16 +354,16 @@ There is another important thing to keep into account. Continuously calling the 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgf5da72e">
-<span style="color: #268bd2; font-weight: bold;">import</span> torch
-<span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
+<pre class="src src-python" id="org6a50e0a">
+<span style="color: #3a81c3; font-weight: bold;">import</span> torch
+<span style="color: #3a81c3; font-weight: bold;">import</span> numpy <span style="color: #3a81c3; font-weight: bold;">as</span> np
 
-<span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">be_aware_of_gradient_accumulation</span>():  
-    <span style="color: #8787d7;">x</span> = torch.tensor([1,2,3],dtype = torch.float32,requires_grad=<span style="color: #d75fd7;">True</span>)
-    <span style="color: #268bd2; font-weight: bold;">for</span> i <span style="color: #268bd2; font-weight: bold;">in</span> <span style="color: #268bd2;">range</span>(2):
-        y = (x**2).<span style="color: #268bd2;">sum</span>() <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">need a scalar</span>
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">be_aware_of_gradient_accumulation</span>():  
+    <span style="color: #715ab1; font-weight: bold;">x</span> = torch.tensor([1,2,3],dtype = torch.float32,requires_grad=<span style="color: #4e3163;">True</span>)
+    <span style="color: #3a81c3; font-weight: bold;">for</span> i <span style="color: #3a81c3; font-weight: bold;">in</span> <span style="color: #3a81c3;">range</span>(2):
+        y = (x**2).<span style="color: #3a81c3;">sum</span>() <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">need a scalar</span>
         y.backward()
-        <span style="color: #268bd2;">print</span>(x.grad)
+        <span style="color: #3a81c3;">print</span>(x.grad)
 
 
 
@@ -376,18 +375,18 @@ Doing above will add to the x.grad twice making the result [4,8,12] instead of [
 To achieve such result we have to clear the x.grad as follows:
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="orgd47e4d0">
-<span style="color: #268bd2; font-weight: bold;">import</span> torch
-<span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
+<pre class="src src-python" id="org1f9e766">
+<span style="color: #3a81c3; font-weight: bold;">import</span> torch
+<span style="color: #3a81c3; font-weight: bold;">import</span> numpy <span style="color: #3a81c3; font-weight: bold;">as</span> np
 
-<span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">be_aware_of_gradient_accumulation</span>():  
-    <span style="color: #8787d7;">x</span> = torch.tensor([1,2,3],dtype = torch.float32,requires_grad=<span style="color: #d75fd7;">True</span>)
-    <span style="color: #268bd2; font-weight: bold;">for</span> i <span style="color: #268bd2; font-weight: bold;">in</span> <span style="color: #268bd2;">range</span>(2):
-        y = (x**2).<span style="color: #268bd2;">sum</span>() <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">need a scalar</span>
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">be_aware_of_gradient_accumulation</span>():  
+    <span style="color: #715ab1; font-weight: bold;">x</span> = torch.tensor([1,2,3],dtype = torch.float32,requires_grad=<span style="color: #4e3163;">True</span>)
+    <span style="color: #3a81c3; font-weight: bold;">for</span> i <span style="color: #3a81c3; font-weight: bold;">in</span> <span style="color: #3a81c3;">range</span>(2):
+        y = (x**2).<span style="color: #3a81c3;">sum</span>() <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">need a scalar</span>
         y.backward()
 
-        <span style="color: #268bd2;">print</span>(x.grad)
-        x.grad.zero_() <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">zero the gradient</span>
+        <span style="color: #3a81c3;">print</span>(x.grad)
+        x.grad.zero_() <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">zero the gradient</span>
 
 
 
@@ -399,9 +398,9 @@ Doing above will clear the grad.
 </div>
 </div>
 </div>
-<div id="outline-container-org4fb9065" class="outline-2">
-<h2 id="org4fb9065">Backpropagation and Gradient Descent</h2>
-<div class="outline-text-2" id="text-org4fb9065">
+<div id="outline-container-org11f12e3" class="outline-2">
+<h2 id="org11f12e3">Backpropagation and Gradient Descent</h2>
+<div class="outline-text-2" id="text-org11f12e3">
 <p>
 Now we learn the heart and soul of neural nets: Gradient Descent algorithm. To understand gradient descent, lets solve a simple linear regression problem numerically. We could have solved the following problem by simple linear regression model but just to illustrate gradient descent which is a numerical technique we solve the problem using numerical approach.<br />
 </p>
@@ -485,42 +484,42 @@ where<br />
 <div class="org-src-container">
 <pre class="src src-python">
 
-<span style="color: #268bd2; font-weight: bold;">import</span> torch
-<span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
+<span style="color: #3a81c3; font-weight: bold;">import</span> torch
+<span style="color: #3a81c3; font-weight: bold;">import</span> numpy <span style="color: #3a81c3; font-weight: bold;">as</span> np
 
-<span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">lets_gradient_descent</span>():
-    <span style="color: #8787d7;">X</span> = np.array([1,2,3,4])
-    <span style="color: #8787d7;">Y</span> = np.array([3,5,7,9])
-    <span style="color: #8787d7;">w</span> = random.random()
-    <span style="color: #8787d7;">b</span> = random.random()
-    <span style="color: #8787d7;">learning_rate</span> = 0.1
-    <span style="color: #8787d7;">n_iters</span> = 100
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">lets_gradient_descent</span>():
+    <span style="color: #715ab1; font-weight: bold;">X</span> = np.array([1,2,3,4])
+    <span style="color: #715ab1; font-weight: bold;">Y</span> = np.array([3,5,7,9])
+    <span style="color: #715ab1; font-weight: bold;">w</span> = random.random()
+    <span style="color: #715ab1; font-weight: bold;">b</span> = random.random()
+    <span style="color: #715ab1; font-weight: bold;">learning_rate</span> = 0.1
+    <span style="color: #715ab1; font-weight: bold;">n_iters</span> = 100
 
-    <span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">forward</span>(x):
-        <span style="color: #268bd2; font-weight: bold;">return</span> w*x+b
+    <span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">forward</span>(x):
+        <span style="color: #3a81c3; font-weight: bold;">return</span> w*x+b
 
-    <span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">predicted</span>(X):
-        <span style="color: #268bd2; font-weight: bold;">return</span> forward(X)
+    <span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">predicted</span>(X):
+        <span style="color: #3a81c3; font-weight: bold;">return</span> forward(X)
 
-    <span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">loss</span>(X,Y):
-        <span style="color: #268bd2; font-weight: bold;">return</span> ((predicted(X)-Y)**2).mean()
+    <span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">loss</span>(X,Y):
+        <span style="color: #3a81c3; font-weight: bold;">return</span> ((predicted(X)-Y)**2).mean()
 
-    <span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">grad_w</span>(X,Y):
-        <span style="color: #268bd2; font-weight: bold;">return</span> (2/4)*np.dot(X,(predicted(X)-Y))
+    <span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">grad_w</span>(X,Y):
+        <span style="color: #3a81c3; font-weight: bold;">return</span> (2/4)*np.dot(X,(predicted(X)-Y))
 
-    <span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">grad_b</span>(X,Y):
-        <span style="color: #268bd2; font-weight: bold;">return</span> (2/4)*(predicted(X)-Y).<span style="color: #268bd2;">sum</span>()
+    <span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">grad_b</span>(X,Y):
+        <span style="color: #3a81c3; font-weight: bold;">return</span> (2/4)*(predicted(X)-Y).<span style="color: #3a81c3;">sum</span>()
 
-    <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"Before training f(5) = </span>{forward(5)}<span style="color: #2aa198;">"</span>)
+    <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"Before training f(5) = </span>{forward(5)}<span style="color: #2d9574;">"</span>)
 
-    <span style="color: #268bd2; font-weight: bold;">for</span> i <span style="color: #268bd2; font-weight: bold;">in</span> <span style="color: #268bd2;">range</span>(n_iters):
-        <span style="color: #8787d7;">w</span> -= learning_rate*grad_w(X,Y)
-        <span style="color: #8787d7;">b</span> -= learning_rate*grad_b(X,Y)
-        <span style="color: #8787d7;">error</span> = loss(X,Y)
+    <span style="color: #3a81c3; font-weight: bold;">for</span> i <span style="color: #3a81c3; font-weight: bold;">in</span> <span style="color: #3a81c3;">range</span>(n_iters):
+        <span style="color: #715ab1; font-weight: bold;">w</span> -= learning_rate*grad_w(X,Y)
+        <span style="color: #715ab1; font-weight: bold;">b</span> -= learning_rate*grad_b(X,Y)
+        <span style="color: #715ab1; font-weight: bold;">error</span> = loss(X,Y)
 
-        <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"w:</span>{w:.3f}<span style="color: #2aa198;"> and b:</span>{b:.3f}<span style="color: #2aa198;"> and loss:</span>{error:.3f}<span style="color: #2aa198;">"</span>)
+        <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"w:</span>{w:.3f}<span style="color: #2d9574;"> and b:</span>{b:.3f}<span style="color: #2d9574;"> and loss:</span>{error:.3f}<span style="color: #2d9574;">"</span>)
 
-        <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"After training iterations f(5) = </span>{forward(5):.3f}<span style="color: #2aa198;">"</span>)  
+        <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"After training iterations f(5) = </span>{forward(5):.3f}<span style="color: #2d9574;">"</span>)  
 
 lets_gradient_descent()
 </pre>
@@ -548,40 +547,40 @@ we understand that x = x+1, but mathematically now x has been self referenced so
 </p>
 <div class="org-src-container">
 <pre class="src src-python">
-<span style="color: #268bd2; font-weight: bold;">import</span> torch
-<span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
+<span style="color: #3a81c3; font-weight: bold;">import</span> torch
+<span style="color: #3a81c3; font-weight: bold;">import</span> numpy <span style="color: #3a81c3; font-weight: bold;">as</span> np
 
-<span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">lets_gradient_descent_with_torch</span>():
-    <span style="color: #8787d7;">X</span> = torch.tensor([1,2,3,4],dtype=torch.float32)
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">lets_gradient_descent_with_torch</span>():
+    <span style="color: #715ab1; font-weight: bold;">X</span> = torch.tensor([1,2,3,4],dtype=torch.float32)
     Y = torch.tensor([3,5,7,9],dtype = torch.float32)
-    w = torch.tensor(random.random(),dtype =torch.float32, requires_grad=<span style="color: #d75fd7;">True</span>)
-    b = torch.tensor(random.random(),dtype=torch.float32,requires_grad=<span style="color: #d75fd7;">True</span>)        
+    w = torch.tensor(random.random(),dtype =torch.float32, requires_grad=<span style="color: #4e3163;">True</span>)
+    b = torch.tensor(random.random(),dtype=torch.float32,requires_grad=<span style="color: #4e3163;">True</span>)        
     learning_rate = 0.1
     n_iters = 100
 
-    <span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">forward</span>(x):
-        <span style="color: #268bd2; font-weight: bold;">return</span> w*x+b
+    <span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">forward</span>(x):
+        <span style="color: #3a81c3; font-weight: bold;">return</span> w*x+b
 
-    <span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">predicted</span>(X):
-        <span style="color: #268bd2; font-weight: bold;">return</span> forward(X)
+    <span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">predicted</span>(X):
+        <span style="color: #3a81c3; font-weight: bold;">return</span> forward(X)
 
-    <span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">loss</span>(X,Y):
-        <span style="color: #268bd2; font-weight: bold;">return</span> ((predicted(X)-Y)**2).mean()
+    <span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">loss</span>(X,Y):
+        <span style="color: #3a81c3; font-weight: bold;">return</span> ((predicted(X)-Y)**2).mean()
 
-    <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"Before training f(5) = </span>{forward(5)}<span style="color: #2aa198;">"</span>)
+    <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"Before training f(5) = </span>{forward(5)}<span style="color: #2d9574;">"</span>)
 
-    <span style="color: #268bd2; font-weight: bold;">for</span> i <span style="color: #268bd2; font-weight: bold;">in</span> <span style="color: #268bd2;">range</span>(n_iters):
+    <span style="color: #3a81c3; font-weight: bold;">for</span> i <span style="color: #3a81c3; font-weight: bold;">in</span> <span style="color: #3a81c3;">range</span>(n_iters):
         error = loss(X,Y)
         error.backward()
-        <span style="color: #268bd2; font-weight: bold;">with</span> torch.no_grad():
+        <span style="color: #3a81c3; font-weight: bold;">with</span> torch.no_grad():
             w -= learning_rate*w.grad
             b -= learning_rate*b.grad
 
-        <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"w:</span>{w:.3f}<span style="color: #2aa198;"> and b:</span>{b:.3f}<span style="color: #2aa198;"> and loss:</span>{error:.3f}<span style="color: #2aa198;">"</span>)
+        <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"w:</span>{w:.3f}<span style="color: #2d9574;"> and b:</span>{b:.3f}<span style="color: #2d9574;"> and loss:</span>{error:.3f}<span style="color: #2d9574;">"</span>)
         w.grad.zero_()
         b.grad.zero_()
 
-    <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"After training iterations f(5) = </span>{forward(5):.3f}<span style="color: #2aa198;">"</span>)  
+    <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"After training iterations f(5) = </span>{forward(5):.3f}<span style="color: #2d9574;">"</span>)  
 
 lets_gradient_descent_with_torch()
 </pre>
@@ -609,43 +608,43 @@ I made the following correction, the outputs from both the code using and withou
 
 <div class="org-src-container">
 <pre class="src src-python">
-<span style="color: #268bd2; font-weight: bold;">import</span> torch
-<span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
-<span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">lets_gradient_descent_without_torch</span>():
-    <span style="color: #8787d7;">X</span> = np.array([1,2,3,4])
-    <span style="color: #8787d7;">Y</span> = np.array([3,5,7,9])
-    <span style="color: #8787d7;">w</span> = 0
-    <span style="color: #8787d7;">b</span> = 0
-    <span style="color: #8787d7;">learning_rate</span> = 0.1
-    <span style="color: #8787d7;">n_iters</span> = 100
+<span style="color: #3a81c3; font-weight: bold;">import</span> torch
+<span style="color: #3a81c3; font-weight: bold;">import</span> numpy <span style="color: #3a81c3; font-weight: bold;">as</span> np
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">lets_gradient_descent_without_torch</span>():
+    <span style="color: #715ab1; font-weight: bold;">X</span> = np.array([1,2,3,4])
+    <span style="color: #715ab1; font-weight: bold;">Y</span> = np.array([3,5,7,9])
+    <span style="color: #715ab1; font-weight: bold;">w</span> = 0
+    <span style="color: #715ab1; font-weight: bold;">b</span> = 0
+    <span style="color: #715ab1; font-weight: bold;">learning_rate</span> = 0.1
+    <span style="color: #715ab1; font-weight: bold;">n_iters</span> = 100
 
-    <span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">forward</span>(x):
-        <span style="color: #268bd2; font-weight: bold;">return</span> w*x+b
+    <span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">forward</span>(x):
+        <span style="color: #3a81c3; font-weight: bold;">return</span> w*x+b
 
-    <span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">predicted</span>(X):
-        <span style="color: #268bd2; font-weight: bold;">return</span> forward(X)
+    <span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">predicted</span>(X):
+        <span style="color: #3a81c3; font-weight: bold;">return</span> forward(X)
 
-    <span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">loss</span>(X,Y):
-        <span style="color: #268bd2; font-weight: bold;">return</span> ((predicted(X)-Y)**2).mean()
+    <span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">loss</span>(X,Y):
+        <span style="color: #3a81c3; font-weight: bold;">return</span> ((predicted(X)-Y)**2).mean()
 
-    <span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">grad_w</span>(X,Y):
-        <span style="color: #268bd2; font-weight: bold;">return</span> (2/4.0)*np.dot(X,(predicted(X)-Y))
+    <span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">grad_w</span>(X,Y):
+        <span style="color: #3a81c3; font-weight: bold;">return</span> (2/4.0)*np.dot(X,(predicted(X)-Y))
 
-    <span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">grad_b</span>(X,Y):
-        <span style="color: #268bd2; font-weight: bold;">return</span> (2/4.0)*(predicted(X)-Y).<span style="color: #268bd2;">sum</span>()
+    <span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">grad_b</span>(X,Y):
+        <span style="color: #3a81c3; font-weight: bold;">return</span> (2/4.0)*(predicted(X)-Y).<span style="color: #3a81c3;">sum</span>()
 
-    <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"Before training f(5) = </span>{forward(5)}<span style="color: #2aa198;">"</span>)
+    <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"Before training f(5) = </span>{forward(5)}<span style="color: #2d9574;">"</span>)
 
-    <span style="color: #268bd2; font-weight: bold;">for</span> i <span style="color: #268bd2; font-weight: bold;">in</span> <span style="color: #268bd2;">range</span>(n_iters):
-        <span style="color: #8787d7;">dw</span> = grad_w(X,Y) <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">Here and</span>
-        <span style="color: #8787d7;">db</span> =grad_b(X,Y)  <span style="color: #008787; background-color: #262626;"># </span><span style="color: #008787; background-color: #262626;">Here I made the changes</span>
-        <span style="color: #8787d7;">w</span> -= learning_rate*dw
-        <span style="color: #8787d7;">b</span> -= learning_rate*db
-        <span style="color: #8787d7;">error</span> = loss(X,Y)
+    <span style="color: #3a81c3; font-weight: bold;">for</span> i <span style="color: #3a81c3; font-weight: bold;">in</span> <span style="color: #3a81c3;">range</span>(n_iters):
+        <span style="color: #715ab1; font-weight: bold;">dw</span> = grad_w(X,Y) <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Here and</span>
+        <span style="color: #715ab1; font-weight: bold;">db</span> =grad_b(X,Y)  <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Here I made the changes</span>
+        <span style="color: #715ab1; font-weight: bold;">w</span> -= learning_rate*dw
+        <span style="color: #715ab1; font-weight: bold;">b</span> -= learning_rate*db
+        <span style="color: #715ab1; font-weight: bold;">error</span> = loss(X,Y)
 
-        <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"w:</span>{w:.3f}<span style="color: #2aa198;"> and b:</span>{b:.3f}<span style="color: #2aa198;"> and loss:</span>{error:.3f}<span style="color: #2aa198;"> grad_w = </span>{dw}<span style="color: #2aa198;"> grad_b = </span>{db}<span style="color: #2aa198;">"</span>)
+        <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"w:</span>{w:.3f}<span style="color: #2d9574;"> and b:</span>{b:.3f}<span style="color: #2d9574;"> and loss:</span>{error:.3f}<span style="color: #2d9574;"> grad_w = </span>{dw}<span style="color: #2d9574;"> grad_b = </span>{db}<span style="color: #2d9574;">"</span>)
 
-    <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"After training iterations f(5) = </span>{forward(5):.3f}<span style="color: #2aa198;">"</span>)  
+    <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"After training iterations f(5) = </span>{forward(5):.3f}<span style="color: #2d9574;">"</span>)  
 
 </pre>
 </div>
@@ -656,23 +655,23 @@ The code with torch was exactly the same with w and b set to 0 instead of random
 </div>
 </div>
 
-<div id="outline-container-org6bd1372" class="outline-2">
-<h2 id="org6bd1372">Training Pipeline</h2>
-<div class="outline-text-2" id="text-org6bd1372">
+<div id="outline-container-orgaa77b5c" class="outline-2">
+<h2 id="orgaa77b5c">Training Pipeline</h2>
+<div class="outline-text-2" id="text-orgaa77b5c">
 <p>
 Now we do everything from defining the loss function to training the model completely in pytorch. To do so we follow the
 following steps:
 </p>
 </div>
-<div id="outline-container-org0a07b06" class="outline-3">
-<h3 id="org0a07b06">Prepare Data</h3>
-<div class="outline-text-3" id="text-org0a07b06">
+<div id="outline-container-orga402136" class="outline-3">
+<h3 id="orga402136">Prepare Data</h3>
+<div class="outline-text-3" id="text-orga402136">
 <p>
 First we provide input and output data:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgd3b8676"><span style="color: #8787d7;">X</span> = torch.tensor([[1],[2],[3],[4]],dtype=torch.float32)
+<pre class="src src-python" id="org1840e68"><span style="color: #715ab1; font-weight: bold;">X</span> = torch.tensor([[1],[2],[3],[4]],dtype=torch.float32)
 Y = torch.tensor([[3],[5],[7],[9]],dtype=torch.float32)
 
 </pre>
@@ -703,7 +702,7 @@ he/she consume cigarette, did the parents had cancer, etc. In this case the inpu
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #8787d7;">X</span> = torch.tensor([[25,1,0],[70,0,1],[50,1,1],[61,1,1]],dtype=torch.float32)
+<pre class="src src-python"><span style="color: #715ab1; font-weight: bold;">X</span> = torch.tensor([[25,1,0],[70,0,1],[50,1,1],[61,1,1]],dtype=torch.float32)
 </pre>
 </div>
 <p>
@@ -712,7 +711,7 @@ there is no heredity of cancer. And a sample output for the above data might be 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #8787d7;">Y</span> = torch.tensor([[1],[0],[0]],dtype=torch.float32)
+<pre class="src src-python"><span style="color: #715ab1; font-weight: bold;">Y</span> = torch.tensor([[1],[0],[0]],dtype=torch.float32)
 </pre>
 </div>
 <p>
@@ -723,9 +722,9 @@ consumes cigarette, etc are generally known as features.
 </div>
 </div>
 
-<div id="outline-container-org6f4f5dc" class="outline-3">
-<h3 id="org6f4f5dc">Design the model</h3>
-<div class="outline-text-3" id="text-org6f4f5dc">
+<div id="outline-container-org992954e" class="outline-3">
+<h3 id="org992954e">Design the model</h3>
+<div class="outline-text-3" id="text-org992954e">
 <p>
 After preparing data we prepare a model.
 First we do the same as we did previously, decide on the input data and the expected output data. This is exactly the same
@@ -733,8 +732,8 @@ as done above, but the dimensions of arrays are different as shown. But first we
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org424b386"><span style="color: #268bd2; font-weight: bold;">import</span> torch
-<span style="color: #268bd2; font-weight: bold;">import</span> torch.nn <span style="color: #268bd2; font-weight: bold;">as</span> nn
+<pre class="src src-python" id="org57c3bb5"><span style="color: #3a81c3; font-weight: bold;">import</span> torch
+<span style="color: #3a81c3; font-weight: bold;">import</span> torch.nn <span style="color: #3a81c3; font-weight: bold;">as</span> nn
 
 </pre>
 </div>
@@ -745,13 +744,13 @@ as done above, but the dimensions of arrays are different as shown. But first we
 Using the nn module we can now directly used the pre-existing loss functions as:
 </p>
 </div>
-<div id="outline-container-orgd9336f7" class="outline-4">
-<h4 id="orgd9336f7">Use the model provided by torch</h4>
-<div class="outline-text-4" id="text-orgd9336f7">
+<div id="outline-container-org637baee" class="outline-4">
+<h4 id="org637baee">Use the model provided by torch</h4>
+<div class="outline-text-4" id="text-org637baee">
 <div class="org-src-container">
-<pre class="src src-python" id="org63ae569"><span style="color: #8787d7;">input_size</span> = 1 <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">This is generatlly the features of the input data</span>
-<span style="color: #8787d7;">output_size</span> = 1
-<span style="color: #8787d7;">model</span> = nn.Linear(input_size,output_size)
+<pre class="src src-python" id="orgefa95af"><span style="color: #715ab1; font-weight: bold;">input_size</span> = 1 <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">This is generatlly the features of the input data</span>
+<span style="color: #715ab1; font-weight: bold;">output_size</span> = 1
+<span style="color: #715ab1; font-weight: bold;">model</span> = nn.Linear(input_size,output_size)
 </pre>
 </div>
 
@@ -761,7 +760,7 @@ Because we created a model using torch, we need not manually create weights and 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #8787d7;">optimizer</span> = torch.optim.SGD(model.parameters(),lr=learning_rate)
+<pre class="src src-python"><span style="color: #715ab1; font-weight: bold;">optimizer</span> = torch.optim.SGD(model.parameters(),lr=learning_rate)
 </pre>
 </div>
 
@@ -788,7 +787,7 @@ We can also deduce that the input has 3 nodes itself and output is 2 noded. as s
 </p>
 
 
-<div id="org8bbb86d" class="figure">
+<div id="orgd805717" class="figure">
 <p><img src="Learning_Pytorch_20210906_120757_VlvwhH.jpg" alt="Learning_Pytorch_20210906_120757_VlvwhH.jpg" />
 </p>
 </div>
@@ -804,7 +803,7 @@ Our neural net i.e the one we are solving looks like this:
 </p>
 
 
-<div id="orgee96d7a" class="figure">
+<div id="org036b75b" class="figure">
 <p><img src="Learning_Pytorch_20210907_130511_VpFV2J.jpg" alt="Learning_Pytorch_20210907_130511_VpFV2J.jpg" />
 </p>
 </div>
@@ -831,8 +830,8 @@ Now, for feed forward, we also don't have to write the code manually, instead we
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #8787d7;">X_test</span> = torch.tensor([5],dtype=torch.float32)
-<span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"Before training f(5) = </span>{model(X_test).item():.3f}<span style="color: #2aa198;">"</span>)
+<pre class="src src-python"><span style="color: #715ab1; font-weight: bold;">X_test</span> = torch.tensor([5],dtype=torch.float32)
+<span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"Before training f(5) = </span>{model(X_test).item():.3f}<span style="color: #2d9574;">"</span>)
 </pre>
 </div>
 
@@ -845,29 +844,29 @@ that the <code>&lt;input_data&gt;</code> is a tensor, and in above code we could
 And to see the weights and biases any time, we may ask for them from the model as:
 </p>
 <div class="org-src-container">
-<pre class="src src-python">[<span style="color: #8787d7;">w</span>,<span style="color: #8787d7;">b</span>] = model.parameters()
+<pre class="src src-python">[<span style="color: #715ab1; font-weight: bold;">w</span>,<span style="color: #715ab1; font-weight: bold;">b</span>] = model.parameters()
 </pre>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-orge2e19ce" class="outline-3">
-<h3 id="orge2e19ce">Building a custom model</h3>
-<div class="outline-text-3" id="text-orge2e19ce">
+<div id="outline-container-org97908ab" class="outline-3">
+<h3 id="org97908ab">Building a custom model</h3>
+<div class="outline-text-3" id="text-org97908ab">
 <p>
 In the previous section we used the <code>nn.Linear()</code> model provide by pytorch. Since out example was quite simple, this
 did the job, but in real life case we have to build a custom model deriving from <code>nn.Module</code> as shown below:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #268bd2; font-weight: bold;">class</span> <span style="color: #df005f; font-weight: bold;">linear_regression</span>(nn.Module):
-    <span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">__init__</span>(<span style="color: #268bd2; font-weight: bold;">self</span>,input_size,output_size) -&gt; <span style="color: #d75fd7;">None</span>:
-        <span style="color: #268bd2;">super</span>().__init__()
-        <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">define layers here</span>
-        <span style="color: #268bd2; font-weight: bold;">self</span>.linear_regression = nn.Linear(input_size,output_size)
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">class</span> <span style="color: #ba2f59; font-weight: bold;">linear_regression</span>(nn.Module):
+    <span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">__init__</span>(<span style="color: #3a81c3; font-weight: bold;">self</span>,input_size,output_size) -&gt; <span style="color: #4e3163;">None</span>:
+        <span style="color: #3a81c3;">super</span>().__init__()
+        <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">define layers here</span>
+        <span style="color: #3a81c3; font-weight: bold;">self</span>.linear_regression = nn.Linear(input_size,output_size)
 
-        <span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">forward</span>(<span style="color: #268bd2; font-weight: bold;">self</span>,x):
-            <span style="color: #268bd2; font-weight: bold;">return</span> <span style="color: #268bd2; font-weight: bold;">self</span>.linear_regression(x)
+        <span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">forward</span>(<span style="color: #3a81c3; font-weight: bold;">self</span>,x):
+            <span style="color: #3a81c3; font-weight: bold;">return</span> <span style="color: #3a81c3; font-weight: bold;">self</span>.linear_regression(x)
 </pre>
 </div>
 <p>
@@ -882,11 +881,11 @@ now putting above code altogether:
 </p>
 </div>
 </div>
-<div id="outline-container-org774cd0f" class="outline-3">
-<h3 id="org774cd0f">Decide on the loss function</h3>
-<div class="outline-text-3" id="text-org774cd0f">
+<div id="outline-container-org9d6b6f5" class="outline-3">
+<h3 id="org9d6b6f5">Decide on the loss function</h3>
+<div class="outline-text-3" id="text-org9d6b6f5">
 <div class="org-src-container">
-<pre class="src src-python" id="orgb437a64"><span style="color: #8787d7;">loss</span> = nn.MSELoss()
+<pre class="src src-python" id="org437ab66"><span style="color: #715ab1; font-weight: bold;">loss</span> = nn.MSELoss()
 </pre>
 </div>
 
@@ -901,16 +900,16 @@ the real outputs.
 </div>
 </div>
 
-<div id="outline-container-org2bf6c51" class="outline-3">
-<h3 id="org2bf6c51">Decide on optimizer</h3>
-<div class="outline-text-3" id="text-org2bf6c51">
+<div id="outline-container-org0ed82b1" class="outline-3">
+<h3 id="org0ed82b1">Decide on optimizer</h3>
+<div class="outline-text-3" id="text-org0ed82b1">
 <p>
 Now instead of manually updating the gradients we use torch optimizer as follows. Notice that even though we
 already know that we need not manually declare weights and biases, but for now lets first do things manually
 then we will do everything using torch:
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="org2023073"><span style="color: #8787d7;">optimizer</span> = torch.optim.SGD([w,b],lr=learning_rate)
+<pre class="src src-python" id="org6481a8d"><span style="color: #715ab1; font-weight: bold;">optimizer</span> = torch.optim.SGD([w,b],lr=learning_rate)
 </pre>
 </div>
 
@@ -928,12 +927,12 @@ same thing. And finally setting the grad to zero has to be done as done previous
 optimizer.
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="orgd80eb9d"><span style="color: #268bd2; font-weight: bold;">for</span> i <span style="color: #268bd2; font-weight: bold;">in</span> <span style="color: #268bd2;">range</span>(n_iters):
-        <span style="color: #8787d7;">error</span> = loss(Y,predicted(X))
+<pre class="src src-python" id="org8f9c803"><span style="color: #3a81c3; font-weight: bold;">for</span> i <span style="color: #3a81c3; font-weight: bold;">in</span> <span style="color: #3a81c3;">range</span>(n_iters):
+        <span style="color: #715ab1; font-weight: bold;">error</span> = loss(Y,predicted(X))
         error.backward()
         optimizer.step()
         optimizer.zero_grad()
-        <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"w:</span>{w:.3f}<span style="color: #2aa198;"> and b:</span>{b:.3f}<span style="color: #2aa198;"> and loss:</span>{error:.3f}<span style="color: #2aa198;"> grad_w = </span>{w.grad}<span style="color: #2aa198;"> grad_b = </span>{b.grad}<span style="color: #2aa198;">"</span>)
+        <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"w:</span>{w:.3f}<span style="color: #2d9574;"> and b:</span>{b:.3f}<span style="color: #2d9574;"> and loss:</span>{error:.3f}<span style="color: #2d9574;"> grad_w = </span>{w.grad}<span style="color: #2d9574;"> grad_b = </span>{b.grad}<span style="color: #2d9574;">"</span>)
 
 </pre>
 </div>
@@ -942,37 +941,37 @@ optimizer.
 Now with everything in place lets check our code:
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #268bd2; font-weight: bold;">import</span> torch
-<span style="color: #268bd2; font-weight: bold;">import</span> torch.nn <span style="color: #268bd2; font-weight: bold;">as</span> nn
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">import</span> torch
+<span style="color: #3a81c3; font-weight: bold;">import</span> torch.nn <span style="color: #3a81c3; font-weight: bold;">as</span> nn
 
-<span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">do_everything_in_torch</span>():
-    <span style="color: #8787d7;">X</span> = torch.tensor([[1],[2],[3],[4]],dtype=torch.float32)
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">do_everything_in_torch</span>():
+    <span style="color: #715ab1; font-weight: bold;">X</span> = torch.tensor([[1],[2],[3],[4]],dtype=torch.float32)
     Y = torch.tensor([[3],[5],[7],[9]],dtype=torch.float32)
     learning_rate = 0.1
     n_iters = 100
 
-    w = torch.tensor(0,dtype =torch.float32, requires_grad=<span style="color: #d75fd7;">True</span>)
-    b = torch.tensor(0,dtype=torch.float32,requires_grad=<span style="color: #d75fd7;">True</span>)        
+    w = torch.tensor(0,dtype =torch.float32, requires_grad=<span style="color: #4e3163;">True</span>)
+    b = torch.tensor(0,dtype=torch.float32,requires_grad=<span style="color: #4e3163;">True</span>)        
 
-    <span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">forward</span>(x):
-        <span style="color: #268bd2; font-weight: bold;">return</span> w*x+b
+    <span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">forward</span>(x):
+        <span style="color: #3a81c3; font-weight: bold;">return</span> w*x+b
 
-    <span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">predicted</span>(X):
-        <span style="color: #268bd2; font-weight: bold;">return</span> forward(X)
+    <span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">predicted</span>(X):
+        <span style="color: #3a81c3; font-weight: bold;">return</span> forward(X)
 
-    loss = nn.MSELoss() <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">This class is callable</span>
+    loss = nn.MSELoss() <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">This class is callable</span>
     optimizer = torch.optim.SGD([w,b],lr=learning_rate)
-    <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"Before training f(5) = </span>{forward(5)}<span style="color: #2aa198;">"</span>)
+    <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"Before training f(5) = </span>{forward(5)}<span style="color: #2d9574;">"</span>)
 
-    <span style="color: #268bd2; font-weight: bold;">for</span> i <span style="color: #268bd2; font-weight: bold;">in</span> <span style="color: #268bd2;">range</span>(n_iters):
+    <span style="color: #3a81c3; font-weight: bold;">for</span> i <span style="color: #3a81c3; font-weight: bold;">in</span> <span style="color: #3a81c3;">range</span>(n_iters):
         error = loss(Y,predicted(X))
         error.backward()
         optimizer.step()
         optimizer.zero_grad()
-        <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"w:</span>{w:.3f}<span style="color: #2aa198;"> and b:</span>{b:.3f}<span style="color: #2aa198;"> and loss:</span>{error:.3f}<span style="color: #2aa198;"> grad_w = </span>{w.grad}<span style="color: #2aa198;"> grad_b = </span>{b.grad}<span style="color: #2aa198;">"</span>)
+        <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"w:</span>{w:.3f}<span style="color: #2d9574;"> and b:</span>{b:.3f}<span style="color: #2d9574;"> and loss:</span>{error:.3f}<span style="color: #2d9574;"> grad_w = </span>{w.grad}<span style="color: #2d9574;"> grad_b = </span>{b.grad}<span style="color: #2d9574;">"</span>)
 
 
-    <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"After training iterations f(5) = </span>{forward(5):.3f}<span style="color: #2aa198;">"</span>)  
+    <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"After training iterations f(5) = </span>{forward(5):.3f}<span style="color: #2d9574;">"</span>)  
 
 </pre>
 </div>
@@ -1010,9 +1009,9 @@ Now we first create a model as shown
 </p>
 </div>
 </div>
-<div id="outline-container-org2c73018" class="outline-3">
-<h3 id="org2c73018">Pipeline and final code</h3>
-<div class="outline-text-3" id="text-org2c73018">
+<div id="outline-container-orga834ebc" class="outline-3">
+<h3 id="orga834ebc">Pipeline and final code</h3>
+<div class="outline-text-3" id="text-orga834ebc">
 <p>
 In summary we do
 </p>
@@ -1035,12 +1034,12 @@ Now combining everything we learned so far:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #268bd2; font-weight: bold;">import</span> torch
-<span style="color: #268bd2; font-weight: bold;">import</span> torch.nn <span style="color: #268bd2; font-weight: bold;">as</span> nn
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">import</span> torch
+<span style="color: #3a81c3; font-weight: bold;">import</span> torch.nn <span style="color: #3a81c3; font-weight: bold;">as</span> nn
 
 
-<span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">do_completely_everything_in_torch</span>():
-    <span style="color: #8787d7;">X</span> = torch.tensor([[1],[2],[3],[4]],dtype=torch.float32)
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">do_completely_everything_in_torch</span>():
+    <span style="color: #715ab1; font-weight: bold;">X</span> = torch.tensor([[1],[2],[3],[4]],dtype=torch.float32)
     Y = torch.tensor([[3],[5],[7],[9]],dtype=torch.float32)
     learning_rate = 0.1
     n_iters = 100
@@ -1051,24 +1050,24 @@ Now combining everything we learned so far:
     output_size = 1
     model = nn.Linear(input_size,output_size)
 
-    loss = nn.MSELoss() <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">This class is callable</span>
+    loss = nn.MSELoss() <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">This class is callable</span>
     optimizer = torch.optim.SGD(model.parameters(),lr=learning_rate)
 
-    <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"Before training f(5) = </span>{model(X_test).item():.3f}<span style="color: #2aa198;">"</span>)
+    <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"Before training f(5) = </span>{model(X_test).item():.3f}<span style="color: #2d9574;">"</span>)
 
-    <span style="color: #268bd2; font-weight: bold;">for</span> i <span style="color: #268bd2; font-weight: bold;">in</span> <span style="color: #268bd2;">range</span>(n_iters):
-        Y_pred = model(X) <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">This is forward pass</span>
-        error = loss(Y,Y_pred) <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">Error computation</span>
-        error.backward() <span style="color: #008787; background-color: #262626;"># </span><span style="color: #008787; background-color: #262626;">This is back propagation</span>
-        optimizer.step() <span style="color: #008787; background-color: #262626;"># </span><span style="color: #008787; background-color: #262626;">This is updating of wights and biases</span>
-        optimizer.zero_grad() <span style="color: #008787; background-color: #262626;"># </span><span style="color: #008787; background-color: #262626;">setting the gradients to zero as they will accumulate if we don't do so</span>
+    <span style="color: #3a81c3; font-weight: bold;">for</span> i <span style="color: #3a81c3; font-weight: bold;">in</span> <span style="color: #3a81c3;">range</span>(n_iters):
+        Y_pred = model(X) <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">This is forward pass</span>
+        error = loss(Y,Y_pred) <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Error computation</span>
+        error.backward() <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">This is back propagation</span>
+        optimizer.step() <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">This is updating of wights and biases</span>
+        optimizer.zero_grad() <span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">setting the gradients to zero as they will accumulate if we don't do so</span>
 
-        [<span style="color: #8787d7;">w</span>,<span style="color: #8787d7;">b</span>] = model.parameters()
-        <span style="color: #268bd2;">print</span>(w,b)
-        <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"w:</span>{w.item():.3f}<span style="color: #2aa198;"> and b:</span>{b.item():.3f}<span style="color: #2aa198;"> and loss:</span>{error:.3f}<span style="color: #2aa198;"> grad_w = </span>{w.grad.item():.3f}<span style="color: #2aa198;"> grad_b = </span>{b.grad.item():.3f}<span style="color: #2aa198;">"</span>)
+        [<span style="color: #715ab1; font-weight: bold;">w</span>,<span style="color: #715ab1; font-weight: bold;">b</span>] = model.parameters()
+        <span style="color: #3a81c3;">print</span>(w,b)
+        <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"w:</span>{w.item():.3f}<span style="color: #2d9574;"> and b:</span>{b.item():.3f}<span style="color: #2d9574;"> and loss:</span>{error:.3f}<span style="color: #2d9574;"> grad_w = </span>{w.grad.item():.3f}<span style="color: #2d9574;"> grad_b = </span>{b.grad.item():.3f}<span style="color: #2d9574;">"</span>)
 
 
-    <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"After training iterations f(5) = </span>{model(X_test).item():.3f}<span style="color: #2aa198;">"</span>)  
+    <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"After training iterations f(5) = </span>{model(X_test).item():.3f}<span style="color: #2d9574;">"</span>)  
 
 </pre>
 </div>
@@ -1089,16 +1088,16 @@ After training iterations f(5) = 10.990<br />
 </div>
 </div>
 
-<div id="outline-container-orgd060aef" class="outline-3">
-<h3 id="orgd060aef">Code with custom model</h3>
-<div class="outline-text-3" id="text-orgd060aef">
+<div id="outline-container-org46d2059" class="outline-3">
+<h3 id="org46d2059">Code with custom model</h3>
+<div class="outline-text-3" id="text-org46d2059">
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #268bd2; font-weight: bold;">import</span> torch
-<span style="color: #268bd2; font-weight: bold;">import</span> torch.nn <span style="color: #268bd2; font-weight: bold;">as</span> nn
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">import</span> torch
+<span style="color: #3a81c3; font-weight: bold;">import</span> torch.nn <span style="color: #3a81c3; font-weight: bold;">as</span> nn
 
 
-<span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">do_completely_everything_in_torch</span>():
-    <span style="color: #8787d7;">X</span> = torch.tensor([[1],[2],[3],[4]],dtype=torch.float32)
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">do_completely_everything_in_torch</span>():
+    <span style="color: #715ab1; font-weight: bold;">X</span> = torch.tensor([[1],[2],[3],[4]],dtype=torch.float32)
     Y = torch.tensor([[3],[5],[7],[9]],dtype=torch.float32)
     learning_rate = 0.1
     n_iters = 100
@@ -1108,34 +1107,34 @@ After training iterations f(5) = 10.990<br />
     input_size = 1
     output_size = 1
 
-    <span style="color: #268bd2; font-weight: bold;">class</span> <span style="color: #df005f; font-weight: bold;">linear_regression</span>(nn.Module):
-        <span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">__init__</span>(<span style="color: #268bd2; font-weight: bold;">self</span>,input_size,output_size) -&gt; <span style="color: #d75fd7;">None</span>:
-            <span style="color: #268bd2;">super</span>().__init__()
-            <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">define layers here</span>
-            <span style="color: #268bd2; font-weight: bold;">self</span>.linear_regression = nn.Linear(input_size,output_size)
+    <span style="color: #3a81c3; font-weight: bold;">class</span> <span style="color: #ba2f59; font-weight: bold;">linear_regression</span>(nn.Module):
+        <span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">__init__</span>(<span style="color: #3a81c3; font-weight: bold;">self</span>,input_size,output_size) -&gt; <span style="color: #4e3163;">None</span>:
+            <span style="color: #3a81c3;">super</span>().__init__()
+            <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">define layers here</span>
+            <span style="color: #3a81c3; font-weight: bold;">self</span>.linear_regression = nn.Linear(input_size,output_size)
 
-        <span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">forward</span>(<span style="color: #268bd2; font-weight: bold;">self</span>,x):
-            <span style="color: #268bd2; font-weight: bold;">return</span> <span style="color: #268bd2; font-weight: bold;">self</span>.linear_regression(x)
+        <span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">forward</span>(<span style="color: #3a81c3; font-weight: bold;">self</span>,x):
+            <span style="color: #3a81c3; font-weight: bold;">return</span> <span style="color: #3a81c3; font-weight: bold;">self</span>.linear_regression(x)
 
     model = linear_regression(input_size,output_size)
 
-    loss = nn.MSELoss() <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">This class is callable</span>
+    loss = nn.MSELoss() <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">This class is callable</span>
     optimizer = torch.optim.SGD(model.parameters(),lr=learning_rate)
 
-    <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"Before training f(5) = </span>{model(X_test).item():.3f}<span style="color: #2aa198;">"</span>)
+    <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"Before training f(5) = </span>{model(X_test).item():.3f}<span style="color: #2d9574;">"</span>)
 
-    <span style="color: #268bd2; font-weight: bold;">for</span> i <span style="color: #268bd2; font-weight: bold;">in</span> <span style="color: #268bd2;">range</span>(n_iters):
+    <span style="color: #3a81c3; font-weight: bold;">for</span> i <span style="color: #3a81c3; font-weight: bold;">in</span> <span style="color: #3a81c3;">range</span>(n_iters):
         error = loss(Y,model(X))
         error.backward()
         optimizer.step()
         optimizer.zero_grad()
 
-        [<span style="color: #8787d7;">w</span>,<span style="color: #8787d7;">b</span>] = model.parameters()
-        <span style="color: #268bd2;">print</span>(w,b)
-        <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"w:</span>{w.item():.3f}<span style="color: #2aa198;"> and b:</span>{b.item():.3f}<span style="color: #2aa198;"> and loss:</span>{error:.3f}<span style="color: #2aa198;"> grad_w = </span>{w.grad.item():.3f}<span style="color: #2aa198;"> grad_b = </span>{b.grad.item():.3f}<span style="color: #2aa198;">"</span>)
+        [<span style="color: #715ab1; font-weight: bold;">w</span>,<span style="color: #715ab1; font-weight: bold;">b</span>] = model.parameters()
+        <span style="color: #3a81c3;">print</span>(w,b)
+        <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"w:</span>{w.item():.3f}<span style="color: #2d9574;"> and b:</span>{b.item():.3f}<span style="color: #2d9574;"> and loss:</span>{error:.3f}<span style="color: #2d9574;"> grad_w = </span>{w.grad.item():.3f}<span style="color: #2d9574;"> grad_b = </span>{b.grad.item():.3f}<span style="color: #2d9574;">"</span>)
 
 
-    <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"After training iterations f(5) = </span>{model(X_test).item():.3f}<span style="color: #2aa198;">"</span>)  
+    <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"After training iterations f(5) = </span>{model(X_test).item():.3f}<span style="color: #2d9574;">"</span>)  
 
 
 </pre>
@@ -1144,9 +1143,9 @@ After training iterations f(5) = 10.990<br />
 </div>
 </div>
 
-<div id="outline-container-org3fce887" class="outline-2">
-<h2 id="org3fce887">Logistic Regression</h2>
-<div class="outline-text-2" id="text-org3fce887">
+<div id="outline-container-org6118b51" class="outline-2">
+<h2 id="org6118b51">Logistic Regression</h2>
+<div class="outline-text-2" id="text-org6118b51">
 <p>
 A regression where the outputs are either 0 or 1 i.e "logistic" as in boolean logic, is logistic regression.
 Now we will now use the data of cancer patients to predict whether a person with certain condition or
@@ -1158,12 +1157,12 @@ normalize the data. So lets get started.
 First lets import necessary headers
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="org332b1f8"><span style="color: #268bd2; font-weight: bold;">import</span> torch
-<span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
-<span style="color: #268bd2; font-weight: bold;">import</span> torch.nn <span style="color: #268bd2; font-weight: bold;">as</span> nn
-<span style="color: #268bd2; font-weight: bold;">from</span> sklearn <span style="color: #268bd2; font-weight: bold;">import</span> datasets
-<span style="color: #268bd2; font-weight: bold;">from</span> sklearn.preprocessing <span style="color: #268bd2; font-weight: bold;">import</span> StandardScaler
-<span style="color: #268bd2; font-weight: bold;">from</span> sklearn.model_selection <span style="color: #268bd2; font-weight: bold;">import</span> train_test_split
+<pre class="src src-python" id="org6a5ba46"><span style="color: #3a81c3; font-weight: bold;">import</span> torch
+<span style="color: #3a81c3; font-weight: bold;">import</span> numpy <span style="color: #3a81c3; font-weight: bold;">as</span> np
+<span style="color: #3a81c3; font-weight: bold;">import</span> torch.nn <span style="color: #3a81c3; font-weight: bold;">as</span> nn
+<span style="color: #3a81c3; font-weight: bold;">from</span> sklearn <span style="color: #3a81c3; font-weight: bold;">import</span> datasets
+<span style="color: #3a81c3; font-weight: bold;">from</span> sklearn.preprocessing <span style="color: #3a81c3; font-weight: bold;">import</span> StandardScaler
+<span style="color: #3a81c3; font-weight: bold;">from</span> sklearn.model_selection <span style="color: #3a81c3; font-weight: bold;">import</span> train_test_split
 
 </pre>
 </div>
@@ -1183,15 +1182,15 @@ independent of other <b>features</b>.
 Now we start the pipeline:
 </p>
 </div>
-<div id="outline-container-orgfeef77e" class="outline-3">
-<h3 id="orgfeef77e">Prepare the data</h3>
-<div class="outline-text-3" id="text-orgfeef77e">
+<div id="outline-container-orgacb2f8f" class="outline-3">
+<h3 id="orgacb2f8f">Prepare the data</h3>
+<div class="outline-text-3" id="text-orgacb2f8f">
 <p>
 Lets load the breast cancer data set as follows:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #8787d7;">breast_cancer_data</span> = datasets.load_breast_cancer()
+<pre class="src src-python"><span style="color: #715ab1; font-weight: bold;">breast_cancer_data</span> = datasets.load_breast_cancer()
 </pre>
 </div>
 
@@ -1202,31 +1201,31 @@ and see:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #268bd2; font-weight: bold;">import</span> torch
-<span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
-<span style="color: #268bd2; font-weight: bold;">import</span> torch.nn <span style="color: #268bd2; font-weight: bold;">as</span> nn
-<span style="color: #268bd2; font-weight: bold;">from</span> sklearn <span style="color: #268bd2; font-weight: bold;">import</span> datasets
-<span style="color: #268bd2; font-weight: bold;">from</span> sklearn.preprocessing <span style="color: #268bd2; font-weight: bold;">import</span> StandardScaler
-<span style="color: #268bd2; font-weight: bold;">from</span> sklearn.model_selection <span style="color: #268bd2; font-weight: bold;">import</span> train_test_split
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">import</span> torch
+<span style="color: #3a81c3; font-weight: bold;">import</span> numpy <span style="color: #3a81c3; font-weight: bold;">as</span> np
+<span style="color: #3a81c3; font-weight: bold;">import</span> torch.nn <span style="color: #3a81c3; font-weight: bold;">as</span> nn
+<span style="color: #3a81c3; font-weight: bold;">from</span> sklearn <span style="color: #3a81c3; font-weight: bold;">import</span> datasets
+<span style="color: #3a81c3; font-weight: bold;">from</span> sklearn.preprocessing <span style="color: #3a81c3; font-weight: bold;">import</span> StandardScaler
+<span style="color: #3a81c3; font-weight: bold;">from</span> sklearn.model_selection <span style="color: #3a81c3; font-weight: bold;">import</span> train_test_split
 
 
-<span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">logis_regression</span>():
-    <span style="color: #8787d7;">breast_cancer_data</span> = datasets.load_breast_cancer()
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">logis_regression</span>():
+    <span style="color: #715ab1; font-weight: bold;">breast_cancer_data</span> = datasets.load_breast_cancer()
 
-    <span style="color: #8787d7;">data</span> = breast_cancer_data.data
-    <span style="color: #8787d7;">target</span> = breast_cancer_data.target
+    <span style="color: #715ab1; font-weight: bold;">data</span> = breast_cancer_data.data
+    <span style="color: #715ab1; font-weight: bold;">target</span> = breast_cancer_data.target
 
-    <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"Shape of data:</span>{data.shape}<span style="color: #2aa198;">"</span>)
-    <span style="color: #268bd2;">print</span>(data)
+    <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"Shape of data:</span>{data.shape}<span style="color: #2d9574;">"</span>)
+    <span style="color: #3a81c3;">print</span>(data)
 
-    <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"Shape of target:</span>{target.shape}<span style="color: #2aa198;">"</span>)
-    <span style="color: #268bd2;">print</span>(target)
+    <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"Shape of target:</span>{target.shape}<span style="color: #2d9574;">"</span>)
+    <span style="color: #3a81c3;">print</span>(target)
 
 logis_regression()
 </pre>
 </div>
 
-<pre class="example" id="org6906459">
+<pre class="example" id="orgf06d485">
 Shape of data:(569, 30)
 [[1.799e+01 1.038e+01 1.228e+02 ... 2.654e-01 4.601e-01 1.189e-01]
  [2.057e+01 1.777e+01 1.329e+02 ... 1.860e-01 2.750e-01 8.902e-02]
@@ -1261,7 +1260,7 @@ there will look like:
 </p>
 
 
-<div id="orga5f1736" class="figure">
+<div id="org5710769" class="figure">
 <p><img src="Learning_Pytorch_20210907_135726_LkAoTc.jpg" alt="Learning_Pytorch_20210907_135726_LkAoTc.jpg" />
 </p>
 </div>
@@ -1306,8 +1305,8 @@ Lets further prepare the data, lets put the data inside <b>X</b> and target i.e 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #8787d7;">X</span> = breast_cancer_data.data
-<span style="color: #8787d7;">Y</span> = breast_cancer_data.target  
+<pre class="src src-python"><span style="color: #715ab1; font-weight: bold;">X</span> = breast_cancer_data.data
+<span style="color: #715ab1; font-weight: bold;">Y</span> = breast_cancer_data.target  
 </pre>
 </div>
 
@@ -1317,7 +1316,7 @@ Then lets get the number of samples and features as:
 
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #8787d7;">n_samples</span>,<span style="color: #8787d7;">n_features</span> = X.shape
+<pre class="src src-python"><span style="color: #715ab1; font-weight: bold;">n_samples</span>,<span style="color: #715ab1; font-weight: bold;">n_features</span> = X.shape
 </pre>
 </div>
 
@@ -1326,7 +1325,7 @@ Then now lets split the data into test and train set:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #8787d7;">X_train</span>,<span style="color: #8787d7;">X_test</span>,<span style="color: #8787d7;">Y_train</span>,<span style="color: #8787d7;">Y_test</span> = train_test_split(X,Y,test_size=0.2,random_state=1234)
+<pre class="src src-python"><span style="color: #715ab1; font-weight: bold;">X_train</span>,<span style="color: #715ab1; font-weight: bold;">X_test</span>,<span style="color: #715ab1; font-weight: bold;">Y_train</span>,<span style="color: #715ab1; font-weight: bold;">Y_test</span> = train_test_split(X,Y,test_size=0.2,random_state=1234)
 </pre>
 </div>
 
@@ -1335,32 +1334,32 @@ Lets see inside the train and test data:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #268bd2; font-weight: bold;">import</span> torch
-<span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
-<span style="color: #268bd2; font-weight: bold;">import</span> torch.nn <span style="color: #268bd2; font-weight: bold;">as</span> nn
-<span style="color: #268bd2; font-weight: bold;">from</span> sklearn <span style="color: #268bd2; font-weight: bold;">import</span> datasets
-<span style="color: #268bd2; font-weight: bold;">from</span> sklearn.preprocessing <span style="color: #268bd2; font-weight: bold;">import</span> StandardScaler
-<span style="color: #268bd2; font-weight: bold;">from</span> sklearn.model_selection <span style="color: #268bd2; font-weight: bold;">import</span> train_test_split
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">import</span> torch
+<span style="color: #3a81c3; font-weight: bold;">import</span> numpy <span style="color: #3a81c3; font-weight: bold;">as</span> np
+<span style="color: #3a81c3; font-weight: bold;">import</span> torch.nn <span style="color: #3a81c3; font-weight: bold;">as</span> nn
+<span style="color: #3a81c3; font-weight: bold;">from</span> sklearn <span style="color: #3a81c3; font-weight: bold;">import</span> datasets
+<span style="color: #3a81c3; font-weight: bold;">from</span> sklearn.preprocessing <span style="color: #3a81c3; font-weight: bold;">import</span> StandardScaler
+<span style="color: #3a81c3; font-weight: bold;">from</span> sklearn.model_selection <span style="color: #3a81c3; font-weight: bold;">import</span> train_test_split
 
 
-<span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">logis_regression</span>():
-    <span style="color: #8787d7;">breast_cancer_data</span> = datasets.load_breast_cancer()
-    <span style="color: #8787d7;">X</span> = breast_cancer_data.data
-    <span style="color: #8787d7;">Y</span> = breast_cancer_data.target
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">logis_regression</span>():
+    <span style="color: #715ab1; font-weight: bold;">breast_cancer_data</span> = datasets.load_breast_cancer()
+    <span style="color: #715ab1; font-weight: bold;">X</span> = breast_cancer_data.data
+    <span style="color: #715ab1; font-weight: bold;">Y</span> = breast_cancer_data.target
 
-    <span style="color: #8787d7;">n_samples</span>,<span style="color: #8787d7;">n_features</span> = X.shape
+    <span style="color: #715ab1; font-weight: bold;">n_samples</span>,<span style="color: #715ab1; font-weight: bold;">n_features</span> = X.shape
 
-    <span style="color: #8787d7;">X_train</span>,<span style="color: #8787d7;">X_test</span>,<span style="color: #8787d7;">Y_train</span>,<span style="color: #8787d7;">Y_test</span> = train_test_split(X,Y,test_size=0.2,random_state=42)
-    <span style="color: #268bd2;">print</span>(X_train.shape,X_test.shape,Y_train.shape,Y_test.shape)
-    <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"X-Train:</span>{X_train}<span style="color: #2aa198;">"</span>)   
-    <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"X-Test:</span>{X_test}<span style="color: #2aa198;">"</span>)
-    <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"Y-Train:</span>{Y_train}<span style="color: #2aa198;">"</span>)   
-    <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"Y-Test:</span>{Y_test}<span style="color: #2aa198;">"</span>)
+    <span style="color: #715ab1; font-weight: bold;">X_train</span>,<span style="color: #715ab1; font-weight: bold;">X_test</span>,<span style="color: #715ab1; font-weight: bold;">Y_train</span>,<span style="color: #715ab1; font-weight: bold;">Y_test</span> = train_test_split(X,Y,test_size=0.2,random_state=42)
+    <span style="color: #3a81c3;">print</span>(X_train.shape,X_test.shape,Y_train.shape,Y_test.shape)
+    <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"X-Train:</span>{X_train}<span style="color: #2d9574;">"</span>)   
+    <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"X-Test:</span>{X_test}<span style="color: #2d9574;">"</span>)
+    <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"Y-Train:</span>{Y_train}<span style="color: #2d9574;">"</span>)   
+    <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"Y-Test:</span>{Y_test}<span style="color: #2d9574;">"</span>)
 logis_regression()
 </pre>
 </div>
 
-<pre class="example" id="orgde9b187">
+<pre class="example" id="org948cec3">
 (455, 30) (114, 30) (455,) (114,)
 X-Train:[[9.029e+00 1.733e+01 5.879e+01 ... 1.750e-01 4.228e-01 1.175e-01]
  [2.109e+01 2.657e+01 1.427e+02 ... 2.903e-01 4.098e-01 1.284e-01]
@@ -1408,37 +1407,37 @@ Now lets normalize the data and see how the looks like:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #268bd2; font-weight: bold;">import</span> torch
-<span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
-<span style="color: #268bd2; font-weight: bold;">import</span> torch.nn <span style="color: #268bd2; font-weight: bold;">as</span> nn
-<span style="color: #268bd2; font-weight: bold;">from</span> sklearn <span style="color: #268bd2; font-weight: bold;">import</span> datasets
-<span style="color: #268bd2; font-weight: bold;">from</span> sklearn.preprocessing <span style="color: #268bd2; font-weight: bold;">import</span> StandardScaler
-<span style="color: #268bd2; font-weight: bold;">from</span> sklearn.model_selection <span style="color: #268bd2; font-weight: bold;">import</span> train_test_split
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">import</span> torch
+<span style="color: #3a81c3; font-weight: bold;">import</span> numpy <span style="color: #3a81c3; font-weight: bold;">as</span> np
+<span style="color: #3a81c3; font-weight: bold;">import</span> torch.nn <span style="color: #3a81c3; font-weight: bold;">as</span> nn
+<span style="color: #3a81c3; font-weight: bold;">from</span> sklearn <span style="color: #3a81c3; font-weight: bold;">import</span> datasets
+<span style="color: #3a81c3; font-weight: bold;">from</span> sklearn.preprocessing <span style="color: #3a81c3; font-weight: bold;">import</span> StandardScaler
+<span style="color: #3a81c3; font-weight: bold;">from</span> sklearn.model_selection <span style="color: #3a81c3; font-weight: bold;">import</span> train_test_split
 
 
-<span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">logis_regression</span>():
-    <span style="color: #8787d7;">breast_cancer_data</span> = datasets.load_breast_cancer()
-    <span style="color: #8787d7;">X</span> = breast_cancer_data.data
-    <span style="color: #8787d7;">Y</span> = breast_cancer_data.target
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">logis_regression</span>():
+    <span style="color: #715ab1; font-weight: bold;">breast_cancer_data</span> = datasets.load_breast_cancer()
+    <span style="color: #715ab1; font-weight: bold;">X</span> = breast_cancer_data.data
+    <span style="color: #715ab1; font-weight: bold;">Y</span> = breast_cancer_data.target
 
-    <span style="color: #8787d7;">n_samples</span>,<span style="color: #8787d7;">n_features</span> = X.shape
+    <span style="color: #715ab1; font-weight: bold;">n_samples</span>,<span style="color: #715ab1; font-weight: bold;">n_features</span> = X.shape
 
-    <span style="color: #8787d7;">X_train</span>,<span style="color: #8787d7;">X_test</span>,<span style="color: #8787d7;">Y_train</span>,<span style="color: #8787d7;">Y_test</span> = train_test_split(X,Y,test_size=0.2,random_state=42)
+    <span style="color: #715ab1; font-weight: bold;">X_train</span>,<span style="color: #715ab1; font-weight: bold;">X_test</span>,<span style="color: #715ab1; font-weight: bold;">Y_train</span>,<span style="color: #715ab1; font-weight: bold;">Y_test</span> = train_test_split(X,Y,test_size=0.2,random_state=42)
 
     sc = StandardScaler()
 
     X_train = sc.fit_transform(X_train)
     X_test = sc.transform(X_test)
-    <span style="color: #268bd2;">print</span>(X_train.shape,X_test.shape)
-    <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"X_train:</span>{X_train}<span style="color: #2aa198;">"</span>)
-    <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"X_test:</span>{X_test}<span style="color: #2aa198;">"</span>)
+    <span style="color: #3a81c3;">print</span>(X_train.shape,X_test.shape)
+    <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"X_train:</span>{X_train}<span style="color: #2d9574;">"</span>)
+    <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"X_test:</span>{X_test}<span style="color: #2d9574;">"</span>)
 
 logis_regression()
 
 </pre>
 </div>
 
-<pre class="example" id="orgf300f32">
+<pre class="example" id="org4944934">
 (455, 30) (114, 30)
 X_train:[[-1.44075296 -0.43531947 -1.36208497 ...  0.9320124   2.09724217
    1.88645014]
@@ -1469,43 +1468,43 @@ X_test:[[-0.46649743 -0.13728933 -0.44421138 ... -0.19435087  0.17275669
 </pre>
 </div>
 
-<div id="outline-container-orgdd575b6" class="outline-4">
-<h4 id="orgdd575b6">Understanding Fit Transform</h4>
-<div class="outline-text-4" id="text-orgdd575b6">
+<div id="outline-container-org0695b80" class="outline-4">
+<h4 id="org0695b80">Understanding Fit Transform</h4>
+<div class="outline-text-4" id="text-org0695b80">
 <p>
     What is going on? What is the fit_transform doing? What is the transform doing? Lets try to answer.
 fit_transform is computing the mean and sd of individual features in all data, and normalizing them. fit_transform is combination of fit() and transform() functions. fit() function computes the mean and sd, transform() then applies it to the data. fit_transform() does both of them at once. fit_transform only remembers the mean and standard deviation of last computation so while doing <code>inverse_transfrom()</code> which will get the original data remember that the last used fit_transforms' data's mean and sd will be used to inverse_transform the data.  Lets understand the basics first:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #268bd2; font-weight: bold;">import</span> torch
-<span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
-<span style="color: #268bd2; font-weight: bold;">import</span> torch.nn <span style="color: #268bd2; font-weight: bold;">as</span> nn
-<span style="color: #268bd2; font-weight: bold;">from</span> sklearn <span style="color: #268bd2; font-weight: bold;">import</span> datasets
-<span style="color: #268bd2; font-weight: bold;">from</span> sklearn.preprocessing <span style="color: #268bd2; font-weight: bold;">import</span> StandardScaler
-<span style="color: #268bd2; font-weight: bold;">from</span> sklearn.model_selection <span style="color: #268bd2; font-weight: bold;">import</span> train_test_split
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">import</span> torch
+<span style="color: #3a81c3; font-weight: bold;">import</span> numpy <span style="color: #3a81c3; font-weight: bold;">as</span> np
+<span style="color: #3a81c3; font-weight: bold;">import</span> torch.nn <span style="color: #3a81c3; font-weight: bold;">as</span> nn
+<span style="color: #3a81c3; font-weight: bold;">from</span> sklearn <span style="color: #3a81c3; font-weight: bold;">import</span> datasets
+<span style="color: #3a81c3; font-weight: bold;">from</span> sklearn.preprocessing <span style="color: #3a81c3; font-weight: bold;">import</span> StandardScaler
+<span style="color: #3a81c3; font-weight: bold;">from</span> sklearn.model_selection <span style="color: #3a81c3; font-weight: bold;">import</span> train_test_split
 
 
-<span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">logis_regression</span>():
-    <span style="color: #8787d7;">breast_cancer_data</span> = datasets.load_breast_cancer()
-    <span style="color: #8787d7;">X</span> = breast_cancer_data.data
-    <span style="color: #8787d7;">Y</span> = breast_cancer_data.target
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">logis_regression</span>():
+    <span style="color: #715ab1; font-weight: bold;">breast_cancer_data</span> = datasets.load_breast_cancer()
+    <span style="color: #715ab1; font-weight: bold;">X</span> = breast_cancer_data.data
+    <span style="color: #715ab1; font-weight: bold;">Y</span> = breast_cancer_data.target
 
-    <span style="color: #8787d7;">n_samples</span>,<span style="color: #8787d7;">n_features</span> = X.shape
+    <span style="color: #715ab1; font-weight: bold;">n_samples</span>,<span style="color: #715ab1; font-weight: bold;">n_features</span> = X.shape
 
-    <span style="color: #8787d7;">X_train</span>,<span style="color: #8787d7;">X_test</span>,<span style="color: #8787d7;">Y_train</span>,<span style="color: #8787d7;">Y_test</span> = train_test_split(X,Y,test_size=0.2,random_state=42)
+    <span style="color: #715ab1; font-weight: bold;">X_train</span>,<span style="color: #715ab1; font-weight: bold;">X_test</span>,<span style="color: #715ab1; font-weight: bold;">Y_train</span>,<span style="color: #715ab1; font-weight: bold;">Y_test</span> = train_test_split(X,Y,test_size=0.2,random_state=42)
 
     sc = StandardScaler()
 
-    <span style="color: #268bd2;">print</span>(<span style="color: #2aa198;">"Before normalizing:"</span>)
+    <span style="color: #3a81c3;">print</span>(<span style="color: #2d9574;">"Before normalizing:"</span>)
     first_features = X_train[:,0]
-    <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"first 10 values of first feature:</span>{first_features[:10]}<span style="color: #2aa198;"> mean of all first feature:</span>{first_features.mean()}<span style="color: #2aa198;"> sd:</span>{np.std(first_features)}<span style="color: #2aa198;">"</span>)
+    <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"first 10 values of first feature:</span>{first_features[:10]}<span style="color: #2d9574;"> mean of all first feature:</span>{first_features.mean()}<span style="color: #2d9574;"> sd:</span>{np.std(first_features)}<span style="color: #2d9574;">"</span>)
     X_train = sc.fit_transform(X_train)
     X_test = sc.transform(X_test)
 
-    <span style="color: #268bd2;">print</span>(<span style="color: #2aa198;">"After normalizing:"</span>)
+    <span style="color: #3a81c3;">print</span>(<span style="color: #2d9574;">"After normalizing:"</span>)
     first_features = X_train[:,0]
-    <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"first 10 values of first feature:</span>{first_features[:10]}<span style="color: #2aa198;"> mean of all first feature:</span>{first_features.mean()}<span style="color: #2aa198;"> sd:</span>{np.std(first_features)}<span style="color: #2aa198;">"</span>)
+    <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"first 10 values of first feature:</span>{first_features[:10]}<span style="color: #2d9574;"> mean of all first feature:</span>{first_features.mean()}<span style="color: #2d9574;"> sd:</span>{np.std(first_features)}<span style="color: #2d9574;">"</span>)
 
 logis_regression()
 </pre>
@@ -1539,49 +1538,49 @@ with respect to each features' mean and sd, not with respect to complete data's 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #268bd2; font-weight: bold;">import</span> torch
-<span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
-<span style="color: #268bd2; font-weight: bold;">import</span> torch.nn <span style="color: #268bd2; font-weight: bold;">as</span> nn
-<span style="color: #268bd2; font-weight: bold;">from</span> sklearn <span style="color: #268bd2; font-weight: bold;">import</span> datasets
-<span style="color: #268bd2; font-weight: bold;">from</span> sklearn.preprocessing <span style="color: #268bd2; font-weight: bold;">import</span> StandardScaler
-<span style="color: #268bd2; font-weight: bold;">from</span> sklearn.model_selection <span style="color: #268bd2; font-weight: bold;">import</span> train_test_split
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">import</span> torch
+<span style="color: #3a81c3; font-weight: bold;">import</span> numpy <span style="color: #3a81c3; font-weight: bold;">as</span> np
+<span style="color: #3a81c3; font-weight: bold;">import</span> torch.nn <span style="color: #3a81c3; font-weight: bold;">as</span> nn
+<span style="color: #3a81c3; font-weight: bold;">from</span> sklearn <span style="color: #3a81c3; font-weight: bold;">import</span> datasets
+<span style="color: #3a81c3; font-weight: bold;">from</span> sklearn.preprocessing <span style="color: #3a81c3; font-weight: bold;">import</span> StandardScaler
+<span style="color: #3a81c3; font-weight: bold;">from</span> sklearn.model_selection <span style="color: #3a81c3; font-weight: bold;">import</span> train_test_split
 
 
-<span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">logis_regression</span>():
-    <span style="color: #8787d7;">breast_cancer_data</span> = datasets.load_breast_cancer()
-    <span style="color: #8787d7;">X</span> = breast_cancer_data.data
-    <span style="color: #8787d7;">Y</span> = breast_cancer_data.target
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">logis_regression</span>():
+    <span style="color: #715ab1; font-weight: bold;">breast_cancer_data</span> = datasets.load_breast_cancer()
+    <span style="color: #715ab1; font-weight: bold;">X</span> = breast_cancer_data.data
+    <span style="color: #715ab1; font-weight: bold;">Y</span> = breast_cancer_data.target
 
-    <span style="color: #8787d7;">n_samples</span>,<span style="color: #8787d7;">n_features</span> = X.shape
+    <span style="color: #715ab1; font-weight: bold;">n_samples</span>,<span style="color: #715ab1; font-weight: bold;">n_features</span> = X.shape
 
-    <span style="color: #8787d7;">X_train</span>,<span style="color: #8787d7;">X_test</span>,<span style="color: #8787d7;">Y_train</span>,<span style="color: #8787d7;">Y_test</span> = train_test_split(X,Y,test_size=0.2,random_state=42)
+    <span style="color: #715ab1; font-weight: bold;">X_train</span>,<span style="color: #715ab1; font-weight: bold;">X_test</span>,<span style="color: #715ab1; font-weight: bold;">Y_train</span>,<span style="color: #715ab1; font-weight: bold;">Y_test</span> = train_test_split(X,Y,test_size=0.2,random_state=42)
 
     sc = StandardScaler()
 
-    <span style="color: #268bd2;">print</span>(<span style="color: #2aa198;">"Before normalizing:"</span>)
+    <span style="color: #3a81c3;">print</span>(<span style="color: #2d9574;">"Before normalizing:"</span>)
     first_features_train = X_train[:,0]
-    <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"first 10 values of first feature train:</span>{first_features_train[:10]}<span style="color: #2aa198;"> mean of all first feature:</span>{first_features_train.mean()}<span style="color: #2aa198;"> sd:</span>{np.std(first_features_train)}<span style="color: #2aa198;">"</span>)
+    <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"first 10 values of first feature train:</span>{first_features_train[:10]}<span style="color: #2d9574;"> mean of all first feature:</span>{first_features_train.mean()}<span style="color: #2d9574;"> sd:</span>{np.std(first_features_train)}<span style="color: #2d9574;">"</span>)
 
     first_features_test = X_test[:,0]
-    <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"first 10 values of first feature test:</span>{first_features_test[:10]}<span style="color: #2aa198;"> mean of all first feature:</span>{first_features_test.mean()}<span style="color: #2aa198;"> sd:</span>{np.std(first_features_test)}<span style="color: #2aa198;">"</span>)
+    <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"first 10 values of first feature test:</span>{first_features_test[:10]}<span style="color: #2d9574;"> mean of all first feature:</span>{first_features_test.mean()}<span style="color: #2d9574;"> sd:</span>{np.std(first_features_test)}<span style="color: #2d9574;">"</span>)
 
     X_train = sc.fit_transform(X_train)
     X_test = sc.transform(X_test)
 
 
-    <span style="color: #268bd2;">print</span>(<span style="color: #2aa198;">"\n\nAfter normalizing:"</span>)
+    <span style="color: #3a81c3;">print</span>(<span style="color: #2d9574;">"\n\nAfter normalizing:"</span>)
     first_features_train = X_train[:,0]
-    <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"first 10 values of first feature train:</span>{first_features_train[:10]}<span style="color: #2aa198;"> mean of all first feature:</span>{first_features_train.mean()}<span style="color: #2aa198;"> sd:</span>{np.std(first_features_train)}<span style="color: #2aa198;">"</span>)
+    <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"first 10 values of first feature train:</span>{first_features_train[:10]}<span style="color: #2d9574;"> mean of all first feature:</span>{first_features_train.mean()}<span style="color: #2d9574;"> sd:</span>{np.std(first_features_train)}<span style="color: #2d9574;">"</span>)
 
     first_features_test = X_test[:,0]
-    <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"first 10 values of first feature test:</span>{first_features_test[:10]}<span style="color: #2aa198;"> mean of all first feature:</span>{first_features_test.mean()}<span style="color: #2aa198;"> sd:</span>{np.std(first_features_test)}<span style="color: #2aa198;">"</span>)
+    <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"first 10 values of first feature test:</span>{first_features_test[:10]}<span style="color: #2d9574;"> mean of all first feature:</span>{first_features_test.mean()}<span style="color: #2d9574;"> sd:</span>{np.std(first_features_test)}<span style="color: #2d9574;">"</span>)
 
 
 logis_regression()
 </pre>
 </div>
 
-<pre class="example" id="orga679043">
+<pre class="example" id="org7a3174d">
 Before normalizing:
 first 10 values of first feature train:[ 9.029 21.09   9.173 10.65  10.17  14.54  14.41  11.43  12.25  19.89 ]
 mean of all first feature:14.117635164835166 sd:3.53192760912877
@@ -1646,10 +1645,10 @@ Now lets move further:
 
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #8787d7;">X_train</span> = torch.from_numpy(X_train.astype(np.float32))
-<span style="color: #8787d7;">Y_train</span> = torch.from_numpy(Y_train.astype(np.float32))
-<span style="color: #8787d7;">X_test</span> = torch.from_numpy(X_test.astype(np.float32))
-<span style="color: #8787d7;">Y_test</span> = torch.from_numpy(Y_test.astype(np.float32))
+<pre class="src src-python"><span style="color: #715ab1; font-weight: bold;">X_train</span> = torch.from_numpy(X_train.astype(np.float32))
+<span style="color: #715ab1; font-weight: bold;">Y_train</span> = torch.from_numpy(Y_train.astype(np.float32))
+<span style="color: #715ab1; font-weight: bold;">X_test</span> = torch.from_numpy(X_test.astype(np.float32))
+<span style="color: #715ab1; font-weight: bold;">Y_test</span> = torch.from_numpy(Y_test.astype(np.float32))
 </pre>
 </div>
 
@@ -1657,8 +1656,8 @@ Now lets move further:
 Now we have to reshape the Y data. As we want a vector as already stated:
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #8787d7;">Y_train</span> = torch.view(Y_train.shape[0],1)
-<span style="color: #8787d7;">Y_test</span> = torch.view(Y_test.shape[0],1)  
+<pre class="src src-python"><span style="color: #715ab1; font-weight: bold;">Y_train</span> = torch.view(Y_train.shape[0],1)
+<span style="color: #715ab1; font-weight: bold;">Y_test</span> = torch.view(Y_test.shape[0],1)  
 </pre>
 </div>
 
@@ -1669,23 +1668,23 @@ With this our data preparation is done.
 </div>
 </div>
 
-<div id="outline-container-orgb7af955" class="outline-3">
-<h3 id="orgb7af955">Model preparation</h3>
-<div class="outline-text-3" id="text-orgb7af955">
+<div id="outline-container-org339488c" class="outline-3">
+<h3 id="org339488c">Model preparation</h3>
+<div class="outline-text-3" id="text-org339488c">
 <p>
 Now lets build a custom model. Here we will be using sigmoid function to squish the output to a range of 0 and 1.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #268bd2; font-weight: bold;">class</span> <span style="color: #df005f; font-weight: bold;">logistic_regression</span>(nn.Module):
-    <span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">__init__</span>(<span style="color: #268bd2; font-weight: bold;">self</span>,input_size,output_size):
-        <span style="color: #268bd2;">super</span>().__init__()
-        <span style="color: #268bd2; font-weight: bold;">self</span>.<span style="color: #8787d7;">linear_model</span> = nn.Linear(input_size,output_size)
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">class</span> <span style="color: #ba2f59; font-weight: bold;">logistic_regression</span>(nn.Module):
+    <span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">__init__</span>(<span style="color: #3a81c3; font-weight: bold;">self</span>,input_size,output_size):
+        <span style="color: #3a81c3;">super</span>().__init__()
+        <span style="color: #3a81c3; font-weight: bold;">self</span>.<span style="color: #715ab1; font-weight: bold;">linear_model</span> = nn.Linear(input_size,output_size)
 
-    <span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">forward</span>(<span style="color: #268bd2; font-weight: bold;">self</span>,X):
-        <span style="color: #268bd2; font-weight: bold;">return</span> torch.sigmoid(<span style="color: #268bd2; font-weight: bold;">self</span>.linear_model(X))    
+    <span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">forward</span>(<span style="color: #3a81c3; font-weight: bold;">self</span>,X):
+        <span style="color: #3a81c3; font-weight: bold;">return</span> torch.sigmoid(<span style="color: #3a81c3; font-weight: bold;">self</span>.linear_model(X))    
 
-<span style="color: #8787d7;">model</span> = logistic_regression(n_features,1)
+<span style="color: #715ab1; font-weight: bold;">model</span> = logistic_regression(n_features,1)
 </pre>
 </div>
 
@@ -1709,7 +1708,7 @@ which looks like:
 </p>
 
 
-<div id="org4fb46b3" class="figure">
+<div id="orgeee1840" class="figure">
 <p><img src="sigmoid.png" alt="sigmoid.png" />
 </p>
 </div>
@@ -1721,9 +1720,9 @@ activation functions.
 </div>
 </div>
 
-<div id="outline-container-org92d16df" class="outline-3">
-<h3 id="org92d16df">Loss function</h3>
-<div class="outline-text-3" id="text-org92d16df">
+<div id="outline-container-org2bd48e9" class="outline-3">
+<h3 id="org2bd48e9">Loss function</h3>
+<div class="outline-text-3" id="text-org2bd48e9">
 <p>
 In the previous example we used Mean Squared Loss function (which
 is what we should use we we expect a real number output
@@ -1738,29 +1737,29 @@ net doesn't necessarily ouput a value between 0 and 1 we used the sigmoid functi
 </ol>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #8787d7;">loss_fun</span> = nn.BCELoss()
+<pre class="src src-python"><span style="color: #715ab1; font-weight: bold;">loss_fun</span> = nn.BCELoss()
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgd2da4ec" class="outline-3">
-<h3 id="orgd2da4ec">Optimizer</h3>
-<div class="outline-text-3" id="text-orgd2da4ec">
+<div id="outline-container-orgb6e7127" class="outline-3">
+<h3 id="orgb6e7127">Optimizer</h3>
+<div class="outline-text-3" id="text-orgb6e7127">
 <p>
 We have our same old optimizer,and lets keep the learning rate to 0.01
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #8787d7;">learning_rate</span> = 0.01
-<span style="color: #8787d7;">optimizer</span> = torch.optim.SGD(model.parameters(),lr = learning_rate)       
+<pre class="src src-python"><span style="color: #715ab1; font-weight: bold;">learning_rate</span> = 0.01
+<span style="color: #715ab1; font-weight: bold;">optimizer</span> = torch.optim.SGD(model.parameters(),lr = learning_rate)       
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org91c5223" class="outline-3">
-<h3 id="org91c5223">Now lets train the data</h3>
-<div class="outline-text-3" id="text-org91c5223">
+<div id="outline-container-orge20a354" class="outline-3">
+<h3 id="orge20a354">Now lets train the data</h3>
+<div class="outline-text-3" id="text-orge20a354">
 <p>
 Remember that there are 5 steps to training:
 </p>
@@ -1774,50 +1773,50 @@ Remember that there are 5 steps to training:
 
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #8787d7;">epochs</span> = 100
+<pre class="src src-python"><span style="color: #715ab1; font-weight: bold;">epochs</span> = 100
 
-<span style="color: #268bd2; font-weight: bold;">for</span> epoch <span style="color: #268bd2; font-weight: bold;">in</span> <span style="color: #268bd2;">range</span>(epochs):
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">forward pass</span>
-    <span style="color: #8787d7;">Y_pred</span> = model(X_train)
+<span style="color: #3a81c3; font-weight: bold;">for</span> epoch <span style="color: #3a81c3; font-weight: bold;">in</span> <span style="color: #3a81c3;">range</span>(epochs):
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">forward pass</span>
+    <span style="color: #715ab1; font-weight: bold;">Y_pred</span> = model(X_train)
 
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">Loss calculation</span>
-    <span style="color: #8787d7;">loss</span> = loss_fun(Y_pred,Y_train)
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Loss calculation</span>
+    <span style="color: #715ab1; font-weight: bold;">loss</span> = loss_fun(Y_pred,Y_train)
 
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">back prop</span>
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">back prop</span>
     loss.backward()
 
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">update weights</span>
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">update weights</span>
     optimizer.step()
 
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">set grads to zero to prevent acculumation</span>
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">set grads to zero to prevent acculumation</span>
     optimizer.zero_grad()
 
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">print loss every 10th step</span>
-    <span style="color: #268bd2; font-weight: bold;">if</span> ((epoch+1) % 10==0):
-        <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"epoch:</span>{epoch+1}<span style="color: #2aa198;"> Loss:</span>{loss.item():.4f}<span style="color: #2aa198;">"</span>)
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">print loss every 10th step</span>
+    <span style="color: #3a81c3; font-weight: bold;">if</span> ((epoch+1) % 10==0):
+        <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"epoch:</span>{epoch+1}<span style="color: #2d9574;"> Loss:</span>{loss.item():.4f}<span style="color: #2d9574;">"</span>)
 
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org5b4c89b" class="outline-3">
-<h3 id="org5b4c89b">Prediction and accuracy</h3>
-<div class="outline-text-3" id="text-org5b4c89b">
+<div id="outline-container-orgb2d7c87" class="outline-3">
+<h3 id="orgb2d7c87">Prediction and accuracy</h3>
+<div class="outline-text-3" id="text-orgb2d7c87">
 <p>
 Now that our model is trained, we now used our test data to see, how well our model performs.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #268bd2; font-weight: bold;">with</span> torch.no_grad():
-    <span style="color: #8787d7;">Y_test_predicted</span> = model(X_test)
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">with</span> torch.no_grad():
+    <span style="color: #715ab1; font-weight: bold;">Y_test_predicted</span> = model(X_test)
 
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">Rounding up because the outputs are either 0 or 1</span>
-    <span style="color: #8787d7;">Y_test_predicted</span> = Y_test_predicted.<span style="color: #268bd2;">round</span>()
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Rounding up because the outputs are either 0 or 1</span>
+    <span style="color: #715ab1; font-weight: bold;">Y_test_predicted</span> = Y_test_predicted.<span style="color: #3a81c3;">round</span>()
 
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">Compute how many predicted matched the test_output set and divide it by total number of cases to get fractional match</span>
-    <span style="color: #8787d7;">matched_fraction</span> = Y_test_predicted.eq(Y_test).<span style="color: #268bd2;">sum</span>()/<span style="color: #268bd2;">float</span>(Y_test.shape[0])
-    <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"Accuracy:</span>{matched_fraction * 100}<span style="color: #2aa198;">%"</span>)
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Compute how many predicted matched the test_output set and divide it by total number of cases to get fractional match</span>
+    <span style="color: #715ab1; font-weight: bold;">matched_fraction</span> = Y_test_predicted.eq(Y_test).<span style="color: #3a81c3;">sum</span>()/<span style="color: #3a81c3;">float</span>(Y_test.shape[0])
+    <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"Accuracy:</span>{matched_fraction * 100}<span style="color: #2d9574;">%"</span>)
 
 </pre>
 </div>
@@ -1832,45 +1831,45 @@ Putting everything together:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #268bd2; font-weight: bold;">import</span> torch
-<span style="color: #268bd2; font-weight: bold;">import</span> numpy <span style="color: #268bd2; font-weight: bold;">as</span> np
-<span style="color: #268bd2; font-weight: bold;">import</span> torch.nn <span style="color: #268bd2; font-weight: bold;">as</span> nn
-<span style="color: #268bd2; font-weight: bold;">from</span> sklearn <span style="color: #268bd2; font-weight: bold;">import</span> datasets
-<span style="color: #268bd2; font-weight: bold;">from</span> sklearn.preprocessing <span style="color: #268bd2; font-weight: bold;">import</span> StandardScaler
-<span style="color: #268bd2; font-weight: bold;">from</span> sklearn.model_selection <span style="color: #268bd2; font-weight: bold;">import</span> train_test_split
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">import</span> torch
+<span style="color: #3a81c3; font-weight: bold;">import</span> numpy <span style="color: #3a81c3; font-weight: bold;">as</span> np
+<span style="color: #3a81c3; font-weight: bold;">import</span> torch.nn <span style="color: #3a81c3; font-weight: bold;">as</span> nn
+<span style="color: #3a81c3; font-weight: bold;">from</span> sklearn <span style="color: #3a81c3; font-weight: bold;">import</span> datasets
+<span style="color: #3a81c3; font-weight: bold;">from</span> sklearn.preprocessing <span style="color: #3a81c3; font-weight: bold;">import</span> StandardScaler
+<span style="color: #3a81c3; font-weight: bold;">from</span> sklearn.model_selection <span style="color: #3a81c3; font-weight: bold;">import</span> train_test_split
 
 
-<span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">logis_regression</span>():
-    <span style="color: #8787d7;">breast_cancer_data</span> = datasets.load_breast_cancer()
-    <span style="color: #8787d7;">X</span> = breast_cancer_data.data
-    <span style="color: #8787d7;">Y</span> = breast_cancer_data.target
+<span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">logis_regression</span>():
+    <span style="color: #715ab1; font-weight: bold;">breast_cancer_data</span> = datasets.load_breast_cancer()
+    <span style="color: #715ab1; font-weight: bold;">X</span> = breast_cancer_data.data
+    <span style="color: #715ab1; font-weight: bold;">Y</span> = breast_cancer_data.target
 
-    <span style="color: #8787d7;">n_samples</span>,<span style="color: #8787d7;">n_features</span> = X.shape
+    <span style="color: #715ab1; font-weight: bold;">n_samples</span>,<span style="color: #715ab1; font-weight: bold;">n_features</span> = X.shape
 
-    <span style="color: #8787d7;">X_train</span>,<span style="color: #8787d7;">X_test</span>,<span style="color: #8787d7;">Y_train</span>,<span style="color: #8787d7;">Y_test</span> = train_test_split(X,Y,test_size=0.2,random_state=42)
+    <span style="color: #715ab1; font-weight: bold;">X_train</span>,<span style="color: #715ab1; font-weight: bold;">X_test</span>,<span style="color: #715ab1; font-weight: bold;">Y_train</span>,<span style="color: #715ab1; font-weight: bold;">Y_test</span> = train_test_split(X,Y,test_size=0.2,random_state=42)
 
     sc = StandardScaler()
 
     X_train = sc.fit_transform(X_train)
     X_test = sc.transform(X_test)
 
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">Convert numpy arrays to torch tensors</span>
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Convert numpy arrays to torch tensors</span>
     X_train = torch.from_numpy(X_train.astype(np.float32))
     Y_train = torch.from_numpy(Y_train.astype(np.float32))
     X_test = torch.from_numpy(X_test.astype(np.float32))
     Y_test = torch.from_numpy(Y_test.astype(np.float32))
 
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">Reshape Y to make it a vector</span>
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Reshape Y to make it a vector</span>
     Y_train = Y_train.view(Y_train.shape[0],1)
     Y_test = Y_test.view(Y_test.shape[0],1)
 
-    <span style="color: #268bd2; font-weight: bold;">class</span> <span style="color: #df005f; font-weight: bold;">logistic_regression</span>(nn.Module):
-        <span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">__init__</span>(<span style="color: #268bd2; font-weight: bold;">self</span>,input_size,output_size):
-            <span style="color: #268bd2;">super</span>().__init__()
-            <span style="color: #268bd2; font-weight: bold;">self</span>.linear_model = nn.Linear(input_size,output_size)
+    <span style="color: #3a81c3; font-weight: bold;">class</span> <span style="color: #ba2f59; font-weight: bold;">logistic_regression</span>(nn.Module):
+        <span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">__init__</span>(<span style="color: #3a81c3; font-weight: bold;">self</span>,input_size,output_size):
+            <span style="color: #3a81c3;">super</span>().__init__()
+            <span style="color: #3a81c3; font-weight: bold;">self</span>.linear_model = nn.Linear(input_size,output_size)
 
-        <span style="color: #268bd2; font-weight: bold;">def</span> <span style="color: #d75fd7; font-weight: bold;">forward</span>(<span style="color: #268bd2; font-weight: bold;">self</span>,X):
-            <span style="color: #268bd2; font-weight: bold;">return</span> torch.sigmoid(<span style="color: #268bd2; font-weight: bold;">self</span>.linear_model(X))    
+        <span style="color: #3a81c3; font-weight: bold;">def</span> <span style="color: #6c3163; font-weight: bold;">forward</span>(<span style="color: #3a81c3; font-weight: bold;">self</span>,X):
+            <span style="color: #3a81c3; font-weight: bold;">return</span> torch.sigmoid(<span style="color: #3a81c3; font-weight: bold;">self</span>.linear_model(X))    
 
     model = logistic_regression(n_features,1)
     loss_fun = nn.BCELoss()
@@ -1880,36 +1879,36 @@ Putting everything together:
 
     epochs = 100
 
-    <span style="color: #268bd2; font-weight: bold;">for</span> epoch <span style="color: #268bd2; font-weight: bold;">in</span> <span style="color: #268bd2;">range</span>(epochs):
+    <span style="color: #3a81c3; font-weight: bold;">for</span> epoch <span style="color: #3a81c3; font-weight: bold;">in</span> <span style="color: #3a81c3;">range</span>(epochs):
 
-        <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">forward pass</span>
+        <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">forward pass</span>
         Y_pred = model(X_train)
 
-        <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">Loss calculation</span>
+        <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Loss calculation</span>
         loss = loss_fun(Y_pred,Y_train)
 
-        <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">back prop</span>
+        <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">back prop</span>
         loss.backward()
 
-        <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">update weights</span>
+        <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">update weights</span>
         optimizer.step()
 
-        <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">set grads to zero to prevent acculumation</span>
+        <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">set grads to zero to prevent acculumation</span>
         optimizer.zero_grad()
 
-        <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">print loss every 10th step</span>
-        <span style="color: #268bd2; font-weight: bold;">if</span> ((epoch+1) % 10==0):
-            <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"epoch:</span>{epoch+1}<span style="color: #2aa198;"> Loss:</span>{loss.item():.4f}<span style="color: #2aa198;">"</span>)
+        <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">print loss every 10th step</span>
+        <span style="color: #3a81c3; font-weight: bold;">if</span> ((epoch+1) % 10==0):
+            <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"epoch:</span>{epoch+1}<span style="color: #2d9574;"> Loss:</span>{loss.item():.4f}<span style="color: #2d9574;">"</span>)
 
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">lets see how our </span>
-    <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">lets check the accuracy of model by comparing the test data</span>
-    <span style="color: #268bd2; font-weight: bold;">with</span> torch.no_grad():
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">lets see how our </span>
+    <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">lets check the accuracy of model by comparing the test data</span>
+    <span style="color: #3a81c3; font-weight: bold;">with</span> torch.no_grad():
         Y_test_predicted = model(X_test)
 
-        <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">Rounding up because the outputs are either 0 or 1</span>
-        Y_test_predicted = Y_test_predicted.<span style="color: #268bd2;">round</span>()
-        matched_fraction = Y_test_predicted.eq(Y_test).<span style="color: #268bd2;">sum</span>()/<span style="color: #268bd2;">float</span>(Y_test.shape[0])
-        <span style="color: #268bd2;">print</span>(f<span style="color: #2aa198;">"Accuracy:</span>{matched_fraction * 100}<span style="color: #2aa198;">%"</span>)
+        <span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">Rounding up because the outputs are either 0 or 1</span>
+        Y_test_predicted = Y_test_predicted.<span style="color: #3a81c3;">round</span>()
+        matched_fraction = Y_test_predicted.eq(Y_test).<span style="color: #3a81c3;">sum</span>()/<span style="color: #3a81c3;">float</span>(Y_test.shape[0])
+        <span style="color: #3a81c3;">print</span>(f<span style="color: #2d9574;">"Accuracy:</span>{matched_fraction * 100}<span style="color: #2d9574;">%"</span>)
 
 logis_regression()
 
@@ -1939,13 +1938,13 @@ array eg \( 4 \times 1\).
 
 
 
-<div id="outline-container-orgd62a5bf" class="outline-2">
-<h2 id="orgd62a5bf">Moving Back to Data Retrieval:Pandas and Excel</h2>
-<div class="outline-text-2" id="text-orgd62a5bf">
+<div id="outline-container-org335ea57" class="outline-2">
+<h2 id="org335ea57">Moving Back to Data Retrieval:Pandas and Excel</h2>
+<div class="outline-text-2" id="text-org335ea57">
 </div>
-<div id="outline-container-org1160344" class="outline-3">
-<h3 id="org1160344">Introduction</h3>
-<div class="outline-text-3" id="text-org1160344">
+<div id="outline-container-org5282753" class="outline-3">
+<h3 id="org5282753">Introduction</h3>
+<div class="outline-text-3" id="text-org5282753">
 <p>
 Do install the necessary packages:
 </p>
@@ -1960,7 +1959,7 @@ Make sure that "xlrd" package is uninstalled, or it is upto date else the syntax
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgb683ba5"><span style="color: #268bd2; font-weight: bold;">import</span> pandas <span style="color: #268bd2; font-weight: bold;">as</span> pd
+<pre class="src src-python" id="orgaffe7ce"><span style="color: #3a81c3; font-weight: bold;">import</span> pandas <span style="color: #3a81c3; font-weight: bold;">as</span> pd
 </pre>
 </div>
 
@@ -1968,9 +1967,9 @@ Make sure that "xlrd" package is uninstalled, or it is upto date else the syntax
 You can just read the excel file as follows:
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #268bd2; font-weight: bold;">import</span> pandas <span style="color: #268bd2; font-weight: bold;">as</span> pd
-<span style="color: #8787d7;">df</span> = pd.read_excel(<span style="color: #2aa198;">'V2.xlsx'</span>)
-<span style="color: #268bd2;">print</span>(df)
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">import</span> pandas <span style="color: #3a81c3; font-weight: bold;">as</span> pd
+<span style="color: #715ab1; font-weight: bold;">df</span> = pd.read_excel(<span style="color: #2d9574;">'V2.xlsx'</span>)
+<span style="color: #3a81c3;">print</span>(df)
 </pre>
 </div>
 
@@ -1979,10 +1978,10 @@ You can just read the excel file as follows:
 To select a particular column as index column i.e now the row can be indexed with that column value. <b>index_col</b> parameter could be provided: <b>usecols=[]</b> can be provided to select particular columns only. 
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #268bd2; font-weight: bold;">import</span> pandas <span style="color: #268bd2; font-weight: bold;">as</span> pd
-<span style="color: #8787d7;">df</span> = pd.read_excel(<span style="color: #2aa198;">'V2.xlsx'</span>,index_col = 2)
-df = pd.read_excel(<span style="color: #2aa198;">'V2.xlsx'</span>,usecols=[1,2,3])
-<span style="color: #268bd2;">print</span>(df)
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">import</span> pandas <span style="color: #3a81c3; font-weight: bold;">as</span> pd
+<span style="color: #715ab1; font-weight: bold;">df</span> = pd.read_excel(<span style="color: #2d9574;">'V2.xlsx'</span>,index_col = 2)
+df = pd.read_excel(<span style="color: #2d9574;">'V2.xlsx'</span>,usecols=[1,2,3])
+<span style="color: #3a81c3;">print</span>(df)
 </pre>
 </div>
 
@@ -1990,70 +1989,70 @@ df = pd.read_excel(<span style="color: #2aa198;">'V2.xlsx'</span>,usecols=[1,2,3
 Import the columns as a particular datatype as follows: Also note clearly that pandas' data frames are simply dictionaries which can be accessed as follows. Also note that any column can to sent to numpy array. Also notice the slicing using <b>loc</b> and <b>iloc</b>. Realize that <b>iloc</b> is even powerful slicing than normal numpy array it can accept values like [0:4,1:4] representing 0,1,2,3 rows and 1,2,3 cols. It also accepts arrays i.e [[1,2,3],[4,5,6]] and so on.
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #268bd2; font-weight: bold;">import</span> pandas <span style="color: #268bd2; font-weight: bold;">as</span> pd
-<span style="color: #8787d7;">df</span> = pd.read_excel(<span style="color: #2aa198;">'V2.xlsx'</span>,dtype = {<span style="color: #2aa198;">"Cspeed"</span>:<span style="color: #268bd2;">float</span>,<span style="color: #2aa198;">"lnWaitingTime"</span>:<span style="color: #268bd2;">float</span>})
-<span style="color: #268bd2;">print</span>(df)
-<span style="color: #268bd2;">print</span>(<span style="color: #2aa198;">"Only Cspeed"</span>)
-speed = df[<span style="color: #2aa198;">"Cspeed"</span>]
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">import</span> pandas <span style="color: #3a81c3; font-weight: bold;">as</span> pd
+<span style="color: #715ab1; font-weight: bold;">df</span> = pd.read_excel(<span style="color: #2d9574;">'V2.xlsx'</span>,dtype = {<span style="color: #2d9574;">"Cspeed"</span>:<span style="color: #3a81c3;">float</span>,<span style="color: #2d9574;">"lnWaitingTime"</span>:<span style="color: #3a81c3;">float</span>})
+<span style="color: #3a81c3;">print</span>(df)
+<span style="color: #3a81c3;">print</span>(<span style="color: #2d9574;">"Only Cspeed"</span>)
+speed = df[<span style="color: #2d9574;">"Cspeed"</span>]
 
-<span style="color: #268bd2;">print</span>(<span style="color: #2aa198;">"Cspeed in numpy"</span>)
+<span style="color: #3a81c3;">print</span>(<span style="color: #2d9574;">"Cspeed in numpy"</span>)
 speed_numpy = speed.to_numpy(speed)
-<span style="color: #268bd2;">print</span>(speed_numpy)
+<span style="color: #3a81c3;">print</span>(speed_numpy)
 
-<span style="color: #268bd2;">print</span>(<span style="color: #2aa198;">"\n\ndf sliced i.e from rows 0 to 2"</span>)
-<span style="color: #268bd2;">print</span>(df.iloc[0:3,])
+<span style="color: #3a81c3;">print</span>(<span style="color: #2d9574;">"\n\ndf sliced i.e from rows 0 to 2"</span>)
+<span style="color: #3a81c3;">print</span>(df.iloc[0:3,])
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgf3a7ebc" class="outline-3">
-<h3 id="orgf3a7ebc">Manually create a pandas dataframe</h3>
-<div class="outline-text-3" id="text-orgf3a7ebc">
+<div id="outline-container-orgade359b" class="outline-3">
+<h3 id="orgade359b">Manually create a pandas dataframe</h3>
+<div class="outline-text-3" id="text-orgade359b">
 <p>
 Manually creating data frame is as simple as:
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #268bd2; font-weight: bold;">import</span> pandas <span style="color: #268bd2; font-weight: bold;">as</span> pd
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">import</span> pandas <span style="color: #3a81c3; font-weight: bold;">as</span> pd
 
-<span style="color: #8787d7;">mydataset</span> = {
-  <span style="color: #2aa198;">'cars'</span>: [<span style="color: #2aa198;">"BMW"</span>, <span style="color: #2aa198;">"Volvo"</span>, <span style="color: #2aa198;">"Ford"</span>],
-  <span style="color: #2aa198;">'passings'</span>: [3, 7, 2]
+<span style="color: #715ab1; font-weight: bold;">mydataset</span> = {
+  <span style="color: #2d9574;">'cars'</span>: [<span style="color: #2d9574;">"BMW"</span>, <span style="color: #2d9574;">"Volvo"</span>, <span style="color: #2d9574;">"Ford"</span>],
+  <span style="color: #2d9574;">'passings'</span>: [3, 7, 2]
 }
 
-<span style="color: #8787d7;">myvar</span> = pd.DataFrame(mydataset)
+<span style="color: #715ab1; font-weight: bold;">myvar</span> = pd.DataFrame(mydataset)
 
-<span style="color: #268bd2;">print</span>(myvar)
+<span style="color: #3a81c3;">print</span>(myvar)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org522b864" class="outline-3">
-<h3 id="org522b864">Querying in pandas</h3>
-<div class="outline-text-3" id="text-org522b864">
+<div id="outline-container-org8b78b31" class="outline-3">
+<h3 id="org8b78b31">Querying in pandas</h3>
+<div class="outline-text-3" id="text-org8b78b31">
 <p>
 Simple queries like "where col_A &gt; col_B" etc can be achieved as simply as follows. Just refer to the column names as shown. Also note that the use <b>&amp;</b> for <b>and</b> and <b>|</b> for <b>or</b>  i.e the bit wise operators.
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #268bd2; font-weight: bold;">import</span> pandas <span style="color: #268bd2; font-weight: bold;">as</span> pd
-<span style="color: #8787d7;">df</span> = pd.read_excel(<span style="color: #2aa198;">'V2.xlsx'</span>)
-<span style="color: #268bd2;">print</span>(df[df.Cspeed&gt;0.5])
-<span style="color: #268bd2;">print</span>(df[(df.Cspeed&gt;0.5) &amp; (df.Width &gt; 20.0)])
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">import</span> pandas <span style="color: #3a81c3; font-weight: bold;">as</span> pd
+<span style="color: #715ab1; font-weight: bold;">df</span> = pd.read_excel(<span style="color: #2d9574;">'V2.xlsx'</span>)
+<span style="color: #3a81c3;">print</span>(df[df.Cspeed&gt;0.5])
+<span style="color: #3a81c3;">print</span>(df[(df.Cspeed&gt;0.5) &amp; (df.Width &gt; 20.0)])
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org1f8ecbc" class="outline-3">
-<h3 id="org1f8ecbc">Adding new columns</h3>
-<div class="outline-text-3" id="text-org1f8ecbc">
+<div id="outline-container-org0931476" class="outline-3">
+<h3 id="org0931476">Adding new columns</h3>
+<div class="outline-text-3" id="text-org0931476">
 <p>
 Adding new columns in pandas is as simple as adding new as adding new item in a dictionary. Simply
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #8787d7;">df</span>[<span style="color: #2aa198;">"Name_of_new_column"</span>] = [&lt;some_data&gt;]
-df.insert(2, <span style="color: #2aa198;">"Age"</span>, [21, 23, 24, 21], <span style="color: #d75fd7;">True</span>)
+<pre class="src src-python"><span style="color: #715ab1; font-weight: bold;">df</span>[<span style="color: #2d9574;">"Name_of_new_column"</span>] = [&lt;some_data&gt;]
+df.insert(2, <span style="color: #2d9574;">"Age"</span>, [21, 23, 24, 21], <span style="color: #4e3163;">True</span>)
 </pre>
 </div>
 <p>
@@ -2064,7 +2063,7 @@ Note that we can insert columns the second way too where we may specify the loca
 The syntax looks like this:
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #d75fd7; font-weight: bold;">DataFrame.apply</span>(func, <span style="color: #8787d7;">axis</span>=0, <span style="color: #8787d7;">raw</span>=False, <span style="color: #8787d7;">result_type</span>=None, <span style="color: #8787d7;">args</span>=(), **kwargs)
+<pre class="src src-bash"><span style="color: #6c3163; font-weight: bold;">DataFrame.apply</span>(func, <span style="color: #715ab1; font-weight: bold;">axis</span>=0, <span style="color: #715ab1; font-weight: bold;">raw</span>=False, <span style="color: #715ab1; font-weight: bold;">result_type</span>=None, <span style="color: #715ab1; font-weight: bold;">args</span>=(), **kwargs)
 </pre>
 </div>
 
@@ -2072,7 +2071,7 @@ The syntax looks like this:
 As implemented in pandas:
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #8787d7;">df</span>[<span style="color: #2aa198;">'Discounted_Price'</span>] = df.<span style="color: #268bd2;">apply</span>(<span style="color: #268bd2; font-weight: bold;">lambda</span> row: row.Cost - (row.Cost * 0.1), axis = 1)
+<pre class="src src-python"><span style="color: #715ab1; font-weight: bold;">df</span>[<span style="color: #2d9574;">'Discounted_Price'</span>] = df.<span style="color: #3a81c3;">apply</span>(<span style="color: #3a81c3; font-weight: bold;">lambda</span> row: row.Cost - (row.Cost * 0.1), axis = 1)
 </pre>
 </div>
 <p>
@@ -2082,22 +2081,22 @@ Above code will add new column "Discounted_Price" as the end using the formula a
 </div>
 </div>
 
-<div id="outline-container-orge87c6c8" class="outline-2">
-<h2 id="orge87c6c8">Saving And Loading Trained Models</h2>
-<div class="outline-text-2" id="text-orge87c6c8">
+<div id="outline-container-org1b8337f" class="outline-2">
+<h2 id="org1b8337f">Saving And Loading Trained Models</h2>
+<div class="outline-text-2" id="text-org1b8337f">
 
-<div id="org81db018" class="figure">
+<div id="org47f7930" class="figure">
 <p><img src="Learning_Pytorch_20220417_205128_nVT541.jpg" alt="Learning_Pytorch_20220417_205128_nVT541.jpg" />
 </p>
 </div>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">STATE DICT</span>
+<pre class="src src-python"><span style="color: #2aa1ae; background-color: #ecf3ec;">#</span><span style="color: #2aa1ae; background-color: #ecf3ec;">STATE DICT</span>
 torch.save(model.state_dict(), PATH)
 
-<span style="color: #008787; background-color: #262626;"># </span><span style="color: #008787; background-color: #262626;">model must be created again with parameters</span>
-<span style="color: #8787d7;">model</span> = Model(*args, **kwargs)
+<span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">model must be created again with parameters</span>
+<span style="color: #715ab1; font-weight: bold;">model</span> = Model(*args, **kwargs)
 model.load_state_dict(torch.load(PATH))
-model.<span style="color: #268bd2;">eval</span>()
+model.<span style="color: #3a81c3;">eval</span>()
 </pre>
 </div>
 <p>
@@ -2111,10 +2110,10 @@ There is also another way and lazy way:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #008787; background-color: #262626;"># </span><span style="color: #008787; background-color: #262626;">COMPLETE MODEL </span>
+<pre class="src src-python"><span style="color: #2aa1ae; background-color: #ecf3ec;"># </span><span style="color: #2aa1ae; background-color: #ecf3ec;">COMPLETE MODEL </span>
 torch.save(model, PATH)
-<span style="color: #8787d7;">model</span> = torch.load(PATH)
-model.<span style="color: #268bd2;">eval</span>()
+<span style="color: #715ab1; font-weight: bold;">model</span> = torch.load(PATH)
+model.<span style="color: #3a81c3;">eval</span>()
 </pre>
 </div>
 </div>
@@ -2122,7 +2121,7 @@ model.<span style="color: #268bd2;">eval</span>()
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Ashvin Oli</p>
-<p class="date">Created: 2024-09-22 Sun 20:51</p>
+<p class="date">Created: 2024-09-22 Sun 21:21</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
